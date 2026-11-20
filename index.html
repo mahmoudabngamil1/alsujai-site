@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموقع الرسمي للشيخ أحمد بن مصطفى السجاعي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800&family=Lateef:wght@400;700&family=Reem+Kufi:wght@500;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #142d4c;
+            --color-primary-dark: #0d1f36;
+            --color-accent: #b08938;
+            --color-accent-light: #d4af37;
+            --color-bg: #f5f3ed;
+            --header-font: 'Aref Ruqaa', serif;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--color-bg);
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-primary-dark { background-color: var(--color-primary-dark); }
+        .text-primary { color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .border-accent { border-color: var(--color-accent); }
+        .header-calligraphy {
+            font-family: var(--header-font);
+        }
+        /* زخرفة خلفية الهيدر */
+        .islamic-header-pattern {
+            background-color: var(--color-primary);
+            background-image: radial-gradient(rgba(212, 175, 55, 0.14) 1px, transparent 1px),
+                              radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+        }
+        /* شريط التمرير الأفقي الواضح والمرن */
+        .custom-h-scroll {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-accent) #e7e5e4;
+            cursor: grab;
+        }
+        .custom-h-scroll:active {
+            cursor: grabbing;
+        }
+        .custom-h-scroll::-webkit-scrollbar {
+            height: 7px;
+        }
+        .custom-h-scroll::-webkit-scrollbar-track {
+            background: #ece9e1;
+            border-radius: 9999px;
+        }
+        .custom-h-scroll::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 9999px;
+        }
+        .custom-h-scroll::-webkit-scrollbar-thumb:hover {
+            background: #8f6d28;
+        }
+        /* شريط الأخبار المتحرك */
+        @keyframes marqueeRtl {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-marquee-rtl {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: marqueeRtl var(--marquee-duration, 28s) linear infinite;
+        }
+        .ticker-wrapper:hover .animate-marquee-rtl {
+            animation-play-state: paused;
+        }
+        /* طي القائمة الجانبية */
+        .sidebar-collapsed {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- الشريط العلوي المختصر -->
+    <div class="bg-primary-dark text-stone-200 text-xs border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+                <span id="topbar-date" class="text-amber-300/90 font-semibold flex items-center gap-1.5">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                    <span>الموقع الرسمي</span>
+                </span>
+                <span class="text-stone-500">|</span>
+                <span id="topbar-tagline" class="text-stone-300 hidden sm:inline">منبر علمي دعوي على منهج الكتاب والسنة</span>
+            </div>
+            <div id="topbar-socials" class="flex items-center gap-4"></div>
+        </div>
+    </div>
+
+    <!-- الهيدر الرئيسي -->
+    <header class="islamic-header-pattern text-white border-b-4 border-accent shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-5 md:py-6 flex flex-col md:flex-row items-center justify-between gap-5">
+            <!-- الشعار والاسم (3 ضغطات تفتح لوحة الإدارة) -->
+            <div class="flex items-center gap-4 text-center md:text-right">
+                <div id="secret-logo-trigger" onclick="handleLogoSecretClick()" title="الشعار الرسمي" class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 p-0.5 shadow-lg cursor-pointer select-none shrink-0 transition-transform active:scale-95">
+                    <div class="w-full h-full bg-primary rounded-[14px] flex items-center justify-center overflow-hidden relative">
+                        <img id="site-logo-img" src="" alt="شعار الموقع" class="hidden w-full h-full object-contain p-1">
+                        <div id="site-logo-fallback" class="flex flex-col items-center justify-center text-amber-300">
+                            <i data-lucide="book-open-check" class="w-8 h-8 md:w-9 md:h-9"></i>
+                            <span class="text-[9px] font-bold mt-0.5 tracking-wider">السجاعي</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="site-prefix-label" class="text-amber-300 text-xs md:text-sm font-bold mb-0.5">الموقع الرسمي للشيخ</div>
+                    <div id="site-name-wrapper">
+                        <img id="site-name-img" src="" alt="اسم الشيخ" style="height: 54px;" class="hidden object-contain mx-auto md:mx-0">
+                        <h1 id="site-sheikh-name" class="header-calligraphy text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-snug drop-shadow">
+                            أحمد بن مصطفى السجاعي
+                        </h1>
+                    </div>
+                    <p id="site-sheikh-desc" class="text-stone-200/90 text-xs md:text-sm mt-1">
+                        دروس علمية مؤصلة، شروحات المتون، مقالات منهجية، وخطب منبرية على منهج الكتاب والسنة
+                    </p>
+                </div>
+            </div>
+
+            <!-- مربع البحث -->
+            <div class="w-full md:w-80 lg:w-96">
+                <div class="relative flex items-center bg-white rounded-full shadow-inner p-1 border-2 border-amber-400/50">
+                    <button onclick="executeGlobalSearch()" class="w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center shrink-0 hover:opacity-90 transition">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </button>
+                    <input type="text" id="global-search-input" onkeyup="if(event.key==='Enter') executeGlobalSearch()" placeholder="ابحث في المقالات، الخطب، الدروس، الكتب..." class="w-full bg-transparent text-gray-800 text-xs md:text-sm px-3 py-1.5 focus:outline-none">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التنقل الأفقي مع شريط تمرير سفلي واضح وأسهم -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 py-2 flex items-center gap-2">
+            <!-- زر طي/إظهار القائمة الجانبية -->
+            <button onclick="toggleRightSidebar()" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 hover:bg-stone-100 text-primary text-xs font-bold transition">
+                <i data-lucide="panel-right" class="w-4 h-4 text-accent"></i>
+                <span id="toggle-sidebar-text">إخفاء القائمة</span>
+            </button>
+
+            <!-- سهم تمرير يمين -->
+            <button onclick="scrollNavBar(220)" title="تمرير لليمين" class="shrink-0 w-8 h-8 rounded-lg bg-stone-100 hover:bg-amber-100 text-primary flex items-center justify-center border border-stone-200">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+
+            <!-- حاوية الأقسام القابلة للتمرير الأفقي بشريط سفلي -->
+            <div id="top-nav-scroller" class="custom-h-scroll flex-1 pb-1.5">
+                <div id="top-nav-list" class="flex items-center gap-1.5 min-w-max"></div>
+            </div>
+
+            <!-- سهم تمرير يسار -->
+            <button onclick="scrollNavBar(-220)" title="تمرير لليسار" class="shrink-0 w-8 h-8 rounded-lg bg-stone-100 hover:bg-amber-100 text-primary flex items-center justify-center border border-stone-200">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <!-- شريط جديد الموقع المتحرك -->
+        <div class="bg-[#faf8f2] border-t border-stone-200/80">
+            <div class="max-w-7xl mx-auto px-3 py-1.5 flex items-center gap-3 overflow-hidden">
+                <span id="ticker-badge-label" class="shrink-0 bg-accent text-white text-[11px] font-bold px-2.5 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                    <span>جديد الموقع</span>
+                </span>
+                <div class="ticker-wrapper flex-1 overflow-hidden relative h-6 flex items-center">
+                    <div id="news-ticker-track" class="animate-marquee-rtl text-xs font-semibold text-primary gap-8"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 py-6">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+            <!-- القائمة الجانبية اليمنى (أقسام الموقع العلمية) -->
+            <aside id="right-sidebar" class="w-full lg:w-72 shrink-0 bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+                <div class="bg-primary text-white px-4 py-3.5 flex items-center justify-between">
+                    <div class="flex items-center gap-2 font-bold text-sm">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-amber-300"></i>
+                        <span id="sidebar-heading-text">أقسام الموقع العلمية</span>
+                    </div>
+                    <button onclick="collapseRightSidebar()" title="طي القائمة" class="text-amber-200 hover:text-white text-xs font-bold px-1.5">«</button>
+                </div>
+                <div id="sidebar-sections-list" class="p-2.5 space-y-1"></div>
+            </aside>
+
+            <!-- منطقة العرض الوسطى واليسرى -->
+            <div class="flex-1 w-full min-w-0">
+
+                <!-- 1. عرض الصفحة الرئيسية -->
+                <div id="view-home" class="flex flex-col xl:flex-row gap-6 items-start">
+                    <!-- عمود البطاقات الرئيسية -->
+                    <div id="home-blocks-container" class="flex-1 w-full space-y-6"></div>
+
+                    <!-- العمود الجانبي الأيسر (جدول الدروس العلمية فقط) -->
+                    <div id="home-schedule-column" class="w-full xl:w-80 shrink-0 space-y-6">
+                        <div class="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+                            <div class="bg-white px-4 py-3.5 border-b border-stone-100 flex items-center justify-between">
+                                <h3 id="schedule-card-heading" class="font-bold text-primary text-sm flex items-center gap-2">
+                                    <i data-lucide="clock" class="w-4 h-4 text-accent"></i>
+                                    <span>جدول الدروس العلمية</span>
+                                </h3>
+                                <span id="schedule-status-badge" class="text-[11px] font-bold text-accent bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-md">محدّث</span>
+                            </div>
+                            <div id="home-schedule-list" class="p-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. عرض قسم محدد أو نتائج البحث -->
+                <div id="view-section" class="hidden space-y-5">
+                    <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h2 id="section-view-title" class="text-lg md:text-xl font-bold text-primary flex items-center gap-2"></h2>
+                            <p id="section-view-desc" class="text-xs text-gray-500 mt-1"></p>
+                        </div>
+                        <button onclick="navigateToSection('home')" class="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-primary text-xs font-bold inline-flex items-center gap-1.5">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <span>العودة للرئيسية</span>
+                        </button>
+                    </div>
+                    <div id="section-items-container" class="space-y-4"></div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- المشغل الصوتي العائم -->
+    <div id="floating-audio-player" class="hidden fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-96 bg-primary text-white rounded-2xl shadow-2xl border border-amber-400/40 p-3.5 z-40">
+        <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2 min-w-0">
+                <span class="w-8 h-8 rounded-lg bg-accent/20 text-amber-300 flex items-center justify-center shrink-0">
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </span>
+                <div class="min-w-0">
+                    <div class="text-[10px] text-amber-300 font-bold">المشغل الصوتي</div>
+                    <div id="player-track-title" class="text-xs font-bold truncate">عنوان المادة</div>
+                </div>
+            </div>
+            <button onclick="closeAudioPlayer()" class="p-1 text-stone-300 hover:text-white">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <audio id="main-audio-element" controls class="w-full h-9 rounded-lg"></audio>
+    </div>
+
+    <!-- نافذة قراءة المادة / تفاصيلها -->
+    <div id="reader-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="bg-primary text-white px-5 py-4 flex items-center justify-between">
+                <h3 id="reader-modal-title" class="font-bold text-base">عنوان المادة</h3>
+                <button onclick="closeReaderModal()" class="text-stone-300 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="reader-modal-meta" class="bg-stone-50 px-5 py-2 border-b text-xs text-gray-500 flex flex-wrap gap-3"></div>
+            <div id="reader-modal-body" class="p-5 overflow-y-auto text-sm leading-relaxed text-gray-800 whitespace-pre-line"></div>
+            <div id="reader-modal-actions" class="bg-stone-50 px-5 py-3 border-t flex flex-wrap gap-2 justify-end"></div>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول للوحة التحكم السرية -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200 space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+                <div class="flex items-center gap-2 text-primary font-bold">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-accent"></i>
+                    <span>لوحة الإدارة والتحكم الذاتي</span>
+                </div>
+                <button onclick="closeLoginModal()" class="text-gray-400 hover:text-gray-700">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div id="login-step-form" class="space-y-4">
+                <p class="text-xs text-gray-600">أدخل كلمة المرور للوصول إلى صلاحيات التعديل الشاملة على الموقع:</p>
+                <input type="password" id="admin-password-input" onkeyup="if(event.key==='Enter') verifyAdminLogin()" placeholder="كلمة المرور" class="w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:border-accent">
+                <div class="flex items-center justify-between">
+                    <button onclick="showRecoveryStep()" class="text-xs text-accent hover:underline font-bold">نسيت كلمة المرور؟</button>
+                    <button onclick="verifyAdminLogin()" class="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:opacity-95">دخول اللوحة</button>
+                </div>
+            </div>
+
+            <div id="recovery-step-form" class="hidden space-y-3">
+                <p class="text-xs text-gray-600">أدخل البريد الإلكتروني أو رقم الهاتف المسجل للاسترداد:</p>
+                <input type="text" id="recovery-contact-input" placeholder="البريد الإلكتروني أو رقم الهاتف" class="w-full px-3 py-2 border rounded-xl text-sm">
+                <input type="password" id="recovery-new-pass" placeholder="كلمة المرور الجديدة" class="w-full px-3 py-2 border rounded-xl text-sm">
+                <div class="flex items-center justify-between pt-1">
+                    <button onclick="backToLoginStep()" class="text-xs text-gray-500 hover:underline">رجوع للدخول</button>
+                    <button onclick="processPasswordRecovery()" class="bg-accent text-white px-5 py-2 rounded-xl text-xs font-bold">إعادة تعيين</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- لوحة الإدارة والتحكم الشاملة 100% -->
+    <div id="admin-dashboard-modal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-[#f7f6f2] rounded-2xl max-w-6xl w-full h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-stone-300">
+            <!-- رأس لوحة التحكم -->
+            <div class="bg-primary text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 shrink-0">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="sliders" class="w-5 h-5 text-amber-300"></i>
+                    <div>
+                        <h2 class="font-bold text-sm sm:text-base">لوحة التحكم المطلقة بالموقع</h2>
+                        <p class="text-[11px] text-amber-200/90">تحكم كامل في الهوية، الأقسام، الصوتيات، جدول الدروس، والنشر المباشر</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="exportStandaloneHTML()" class="bg-accent hover:bg-amber-600 text-white px-3.5 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>تنزيل نسخة index.html النهائية</span>
+                    </button>
+                    <button onclick="closeAdminDashboard()" class="bg-white/10 hover:bg-white/20 text-white px-3 py-2 rounded-xl text-xs font-bold">إغلاق</button>
+                </div>
+            </div>
+
+            <!-- شريط تبويبات لوحة التحكم القابل للتمرير الأفقي -->
+            <div class="bg-white border-b border-stone-200 px-3 py-2 flex items-center gap-2 shrink-0">
+                <button onclick="scrollAdminTabs(200)" class="w-7 h-7 rounded-lg bg-stone-100 text-primary flex items-center justify-center shrink-0">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+                <div id="admin-tabs-scroller" class="custom-h-scroll flex-1 pb-1">
+                    <div id="admin-tabs-bar" class="flex items-center gap-1.5 min-w-max"></div>
+                </div>
+                <button onclick="scrollAdminTabs(-200)" class="w-7 h-7 rounded-lg bg-stone-100 text-primary flex items-center justify-center shrink-0">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- جسم التبويبات -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+
+                <!-- تبويب 1: الهوية والمظهر والنصوص -->
+                <div id="admin-tab-identity" class="admin-panel space-y-6">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-primary border-b pb-2">الهوية الأساسية والشعار والخطوط</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">العبارة التمهيدية فوق الاسم</label>
+                                <input type="text" id="cfg-prefix" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اسم الشيخ في الهيدر</label>
+                                <input type="text" id="cfg-name" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اختيار خط الاسم (خط الخطاط)</label>
+                                <select id="cfg-header-font" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                                    <option value="'Aref Ruqaa', serif">خط الخطاط (رقعة / ثلث مزخرف)</option>
+                                    <option value="'Reem Kufi', sans-serif">خط الخطاط الكوفي الهندسي</option>
+                                    <option value="'Scheherazade New', serif">خط الخطاط النسخ الأصيل</option>
+                                    <option value="'Amiri', serif">خط الخطاط الأميري الكلاسيكي</option>
+                                    <option value="'Lateef', serif">خط الخطاط الفارسي / النستعليق</option>
+                                    <option value="'Cairo', sans-serif">خط القاهرة الحديث</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold mb-1">الوصف أسفل اسم الشيخ</label>
+                            <input type="text" id="cfg-desc" class="w-full px-3 py-2 border rounded-lg text-sm">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t">
+                            <div class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                                <label class="block text-xs font-bold text-primary">شعار الموقع (صورة PNG / JPG)</label>
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'logoDataUrl')" class="text-xs w-full">
+                                <button onclick="clearUploadedImage('logoDataUrl')" class="text-[11px] text-red-600 hover:underline">إزالة الشعار واستخدام الافتراضي</button>
+                            </div>
+                            <div class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                                <label class="block text-xs font-bold text-primary">مخطوطة اسم الشيخ (صورة PNG شفافة اختيارية)</label>
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'nameImgDataUrl')" class="text-xs w-full">
+                                <div class="flex items-center justify-between gap-2">
+                                    <div class="flex items-center gap-1.5 text-xs">
+                                        <span>الارتفاع (px):</span>
+                                        <input type="number" id="cfg-name-img-height" min="30" max="140" value="54" class="w-16 px-2 py-1 border rounded text-xs">
+                                    </div>
+                                    <button onclick="clearUploadedImage('nameImgDataUrl')" class="text-[11px] text-red-600 hover:underline">إزالة الصورة واعتماد الخط</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اللون الأساسي (الكحلي)</label>
+                                <input type="color" id="cfg-color-primary" class="w-full h-10 rounded-lg cursor-pointer border">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اللون الذهبي المميز</label>
+                                <input type="color" id="cfg-color-accent" class="w-full h-10 rounded-lg cursor-pointer border">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">لون خلفية الصفحة</label>
+                                <input type="color" id="cfg-color-bg" class="w-full h-10 rounded-lg cursor-pointer border">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-primary border-b pb-2">تخصيص جميع نصوص الأزرار والأشرطة والفوتر</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عبارة الشريط العلوي</label>
+                                <input type="text" id="cfg-topbar-tagline" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">نص مربع البحث</label>
+                                <input type="text" id="cfg-search-placeholder" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عنوان القائمة الجانبية</label>
+                                <input type="text" id="cfg-sidebar-heading" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 border-t pt-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">نص شارة الأخبار</label>
+                                <input type="text" id="cfg-ticker-badge" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">سرعة الشريط (ثواني)</label>
+                                <input type="number" min="8" max="90" id="cfg-marquee-speed" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">تنبيه مخصص بالشريط</label>
+                                <input type="text" id="cfg-custom-ticker" placeholder="يُترك فارغاً للعرض التلقائي" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 border-t pt-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">زر إخفاء القائمة</label>
+                                <input type="text" id="cfg-btn-hide-sidebar" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">زر إظهار القائمة</label>
+                                <input type="text" id="cfg-btn-show-sidebar" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">نص زر (المزيد)</label>
+                                <input type="text" id="cfg-btn-more-text" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">شارة جدول الدروس</label>
+                                <input type="text" id="cfg-schedule-badge-text" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 border-t pt-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عنوان العمود الأول بالفوتر</label>
+                                <input type="text" id="cfg-footer-col1-title" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عنوان العمود الثاني بالفوتر</label>
+                                <input type="text" id="cfg-footer-col2-title" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold mb-1">وصف العمود الأول بالفوتر</label>
+                                <textarea id="cfg-footer-col1-text" rows="2" class="w-full px-3 py-2 border rounded-lg text-sm"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عنوان العمود الثالث بالفوتر</label>
+                                <input type="text" id="cfg-footer-col3-title" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">نص حقوق النشر أسفل الصفحة</label>
+                                <input type="text" id="cfg-footer-copyright" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold mb-1">نص تنبيه حقوق النشر بالفوتر</label>
+                                <textarea id="cfg-footer-col3-text" rows="2" class="w-full px-3 py-2 border rounded-lg text-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <button onclick="saveIdentitySettings()" class="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:opacity-95">
+                            حفظ كافة إعدادات الهوية والمظهر
+                        </button>
+                    </div>
+                </div>
+
+                <!-- تبويب 2: تخصيص بطاقات الصفحة الرئيسية -->
+                <div id="admin-tab-homelayout" class="admin-panel hidden space-y-6">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-primary border-b pb-2">إضافة بطاقة قسم جديدة للصفحة الرئيسية</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-bold mb-1">اختر القسم المراد عرضه في الرئيسية</label>
+                                <select id="new-home-block-sec" class="w-full px-3 py-2 border rounded-lg text-sm bg-white"></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عدد العناصر</label>
+                                <input type="number" id="new-home-block-count" value="4" min="1" max="20" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <button onclick="addNewHomeBlock()" class="w-full bg-accent text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-95">
+                                    + إضافة للرئيسية
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
+                            <h3 class="font-bold text-primary">التحكم في بطاقات الصفحة الرئيسية وترتيبها وحذفها</h3>
+                            <label class="inline-flex items-center gap-2 text-xs font-bold text-primary cursor-pointer bg-stone-50 px-3 py-1.5 rounded-lg border">
+                                <input type="checkbox" id="cfg-show-schedule-col" onchange="toggleScheduleColumnVisibility(this.checked)" class="accent-[#b08938] w-4 h-4">
+                                <span>إظهار عمود جدول الدروس العلمية بالرئيسية</span>
+                            </label>
+                        </div>
+                        <div id="admin-home-blocks-list" class="divide-y divide-stone-100"></div>
+                    </div>
+                </div>
+
+                <!-- تبويب 3: إدارة الأقسام وتخصيص حقولها -->
+                <div id="admin-tab-sections" class="admin-panel hidden space-y-6">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-primary border-b pb-2">إنشاء قسم علمي جديد مع تحديد الحقول المسموحة فيه</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اسم القسم الجديد *</label>
+                                <input type="text" id="new-sec-title" placeholder="مثال: شروحات العقيدة" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">الأيقونة</label>
+                                <select id="new-sec-icon" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                                    <option value="folder">مجلد علمي</option>
+                                    <option value="headphones">صوتيات</option>
+                                    <option value="video">مرئيات</option>
+                                    <option value="book-open">كتاب / متن</option>
+                                    <option value="file-text">مقال / بحث</option>
+                                    <option value="mic">خطبة / محاضرة</option>
+                                    <option value="graduation-cap">دورة علمية</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">وصف القسم</label>
+                                <input type="text" id="new-sec-desc" placeholder="وصف مختصر يظهر أعلى القسم" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-xl border flex flex-wrap items-center gap-4 text-xs font-bold text-primary">
+                            <span class="text-accent">الحقول المفعلة في هذا القسم:</span>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="new-sec-f-audio" checked class="accent-[#b08938]"> ملف صوتي / رابط صوت</label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="new-sec-f-external" checked class="accent-[#b08938]"> رابط خارجي (مرئي/صوتي)</label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="new-sec-f-pdf" checked class="accent-[#b08938]"> ملف PDF</label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="new-sec-f-cover" class="accent-[#b08938]"> صورة غلاف</label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="new-sec-f-body" checked class="accent-[#b08938]"> نص مقروء / تفريغ</label>
+                        </div>
+                        <button onclick="addNewCustomSection()" class="bg-primary text-white px-5 py-2 rounded-xl text-xs font-bold">+ إنشاء القسم الآن</button>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-3">
+                        <h3 class="font-bold text-primary border-b pb-2">جميع أقسام الموقع (تعديل الاسم / الحقول / الترتيب / الإخفاء / الحذف)</h3>
+                        <div id="admin-sections-list" class="divide-y divide-stone-100"></div>
+                    </div>
+                </div>
+
+                <!-- تبويب 4: إدارة جدول الدروس العلمية -->
+                <div id="admin-tab-schedule" class="admin-panel hidden space-y-6">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
+                            <h3 class="font-bold text-primary">عنوان بطاقة جدول الدروس</h3>
+                            <div class="flex gap-2">
+                                <input type="text" id="cfg-schedule-heading" class="px-3 py-1.5 border rounded-lg text-xs font-bold">
+                                <button onclick="saveScheduleHeading()" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold">حفظ العنوان</button>
+                            </div>
+                        </div>
+
+                        <h4 class="font-bold text-sm text-primary">إضافة أو تعديل درس في الجدول الأسبوعي</h4>
+                        <input type="hidden" id="sched-edit-idx" value="-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اليوم *</label>
+                                <input type="text" id="sched-day" placeholder="مثال: السبت والثلاثاء" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">الوقت</label>
+                                <input type="text" id="sched-time" placeholder="مثال: بعد صلاة المغرب" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">عنوان الدرس أو الكتاب *</label>
+                                <input type="text" id="sched-title" placeholder="مثال: شرح كتاب التوحيد" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">المكان أو البث المباشر</label>
+                                <input type="text" id="sched-location" placeholder="مثال: المسجد الكبير / بث تليجرام" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="saveScheduleEntry()" class="bg-accent text-white px-5 py-2 rounded-xl text-xs font-bold">حفظ في الجدول</button>
+                            <button onclick="resetScheduleForm()" id="sched-cancel-btn" class="hidden bg-stone-200 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold">إلغاء التعديل</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-3">
+                        <h3 class="font-bold text-primary border-b pb-2">الدروس المدرجة في الجدول</h3>
+                        <div id="admin-schedule-list" class="divide-y divide-stone-100"></div>
+                    </div>
+                </div>
+
+                <!-- تبويب 5: إدارة محتوى القسم المختار (صوتيات، روابط خارجية، PDF، نصوص) -->
+                <div id="admin-tab-content" class="admin-panel hidden space-y-6">
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
+                            <h3 id="content-editor-heading" class="font-bold text-primary">إضافة مادة جديدة</h3>
+                            <span id="content-editor-sec-badge" class="text-xs font-bold bg-amber-50 text-accent px-3 py-1 rounded-lg border border-amber-200">القسم</span>
+                        </div>
+                        <input type="hidden" id="item-edit-id" value="">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold mb-1">عنوان المادة / الخطبة / الدرس *</label>
+                                <input type="text" id="item-title" placeholder="اكتب العنوان الكامل هنا..." class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">التاريخ / التصنيف الفرعي</label>
+                                <input type="text" id="item-date" placeholder="مثال: 20 جمادى الأولى 1448هـ" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+
+                        <!-- حقل الصوتيات -->
+                        <div id="field-group-audio" class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                            <label class="block text-xs font-bold text-primary">المادة الصوتية (ارفع ملف MP3 من جهازك أو ضع رابطاً مباشراً)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <input type="file" id="item-audio-file" accept="audio/*" onchange="handleItemMediaFile(this, 'audio')" class="text-xs bg-white p-2 rounded-lg border">
+                                <input type="url" id="item-audio-url" dir="ltr" placeholder="أو رابط ملف صوتي مباشر (https://...mp3)" class="px-3 py-2 border rounded-lg text-xs bg-white">
+                            </div>
+                        </div>
+
+                        <!-- حقل الرابط الخارجي -->
+                        <div id="field-group-external" class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                            <label class="block text-xs font-bold text-primary">رابط خارجي للمادة (يوتيوب / تليجرام / مرئي / صوتي خارجي)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <input type="url" id="item-external-url" dir="ltr" placeholder="https://youtube.com/... أو https://t.me/..." class="md:col-span-2 px-3 py-2 border rounded-lg text-xs bg-white">
+                                <input type="text" id="item-external-label" placeholder="نص الزر (مثال: مشاهدة / استماع)" class="px-3 py-2 border rounded-lg text-xs bg-white">
+                            </div>
+                        </div>
+
+                        <!-- حقل PDF -->
+                        <div id="field-group-pdf" class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                            <label class="block text-xs font-bold text-primary">ملف PDF / كتاب / مطوية (من الجهاز أو رابط مباشر)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <input type="file" id="item-pdf-file" accept="application/pdf" onchange="handleItemMediaFile(this, 'pdf')" class="text-xs bg-white p-2 rounded-lg border">
+                                <input type="url" id="item-pdf-url" dir="ltr" placeholder="أو رابط ملف PDF مباشر (https://...pdf)" class="px-3 py-2 border rounded-lg text-xs bg-white">
+                            </div>
+                        </div>
+
+                        <!-- حقل الغلاف -->
+                        <div id="field-group-cover" class="bg-stone-50 p-3.5 rounded-xl border space-y-2">
+                            <label class="block text-xs font-bold text-primary">صورة الغلاف / المصغرة (اختياري)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <input type="file" id="item-cover-file" accept="image/*" onchange="handleItemMediaFile(this, 'cover')" class="text-xs bg-white p-2 rounded-lg border">
+                                <input type="url" id="item-cover-url" dir="ltr" placeholder="أو رابط صورة مباشر (https://...)" class="px-3 py-2 border rounded-lg text-xs bg-white">
+                            </div>
+                        </div>
+
+                        <!-- حقل النص -->
+                        <div id="field-group-body">
+                            <label class="block text-xs font-bold mb-1">النص المقروء / التفريغ / الوصف</label>
+                            <textarea id="item-body" rows="4" placeholder="اكتب نص المقال أو تفريغ الخطبة أو نبذة عن الدرس..." class="w-full px-3 py-2 border rounded-lg text-sm"></textarea>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="saveSectionItem()" class="bg-primary text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:opacity-95">
+                                حفظ ونشر في القسم
+                            </button>
+                            <button onclick="resetItemEditorForm()" id="item-cancel-edit-btn" class="hidden bg-stone-200 text-gray-700 px-4 py-2.5 rounded-xl text-xs font-bold">
+                                إلغاء التعديل
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-3">
+                        <h3 class="font-bold text-primary border-b pb-2">المواد المنشورة في هذا القسم</h3>
+                        <div id="admin-section-items-list" class="divide-y divide-stone-100"></div>
+                    </div>
+                </div>
+
+                <!-- تبويب 6: روابط التواصل الاجتماعي -->
+                <div id="admin-tab-socials" class="admin-panel hidden bg-white p-5 rounded-2xl border border-stone-200 space-y-5">
+                    <h3 class="font-bold text-primary border-b pb-2">إدارة منصات التواصل والقنوات الرسمية</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-stone-50 p-3.5 rounded-xl border border-stone-200 items-end">
+                        <div>
+                            <label class="block text-xs font-bold mb-1">اسم المنصة الجديدة *</label>
+                            <input type="text" id="new-social-label" placeholder="مثال: فيسبوك، ساوند كلاود..." class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">الأيقونة</label>
+                            <select id="new-social-icon" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                                <option value="globe">موقع / رابط عام</option>
+                                <option value="youtube">يوتيوب</option>
+                                <option value="send">تليجرام</option>
+                                <option value="message-circle">واتساب</option>
+                                <option value="at-sign">إكس / تويتر</option>
+                                <option value="facebook">فيسبوك</option>
+                                <option value="instagram">إنستغرام</option>
+                                <option value="headphones">منصة صوتية</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">الرابط (URL) *</label>
+                            <input type="url" id="new-social-url" dir="ltr" placeholder="https://..." class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                        </div>
+                        <div>
+                            <button onclick="addNewSocialPlatform()" class="w-full bg-accent text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-95">
+                                + إضافة منصة
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold text-primary">المنصات المضافة حالياً (تعديل / ترتيب / حذف):</h4>
+                        <div id="admin-social-platforms-list" class="divide-y divide-stone-100 border rounded-xl px-3"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t">
+                        <div>
+                            <label class="block text-xs font-bold mb-1">البريد الإلكتروني الرسمي (يظهر في الفوتر)</label>
+                            <input type="email" id="cfg-social-email" dir="ltr" placeholder="info@alsujai.com" class="w-full px-3 py-2 border rounded-lg text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">رقم الهاتف / التنسيق (يظهر في الفوتر)</label>
+                            <input type="text" id="cfg-social-phone" dir="ltr" placeholder="+20..." class="w-full px-3 py-2 border rounded-lg text-sm">
+                        </div>
+                    </div>
+                    <button onclick="saveSocialLinks()" class="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold">حفظ إعدادات التواصل</button>
+                </div>
+
+                <!-- تبويب 7: الأمان والنشر المباشر على نفس الرابط -->
+                <div id="admin-tab-security" class="admin-panel hidden space-y-6">
+                    <!-- تغيير كلمة المرور مع اشتراط كلمة المرور الحالية -->
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-4">
+                        <h3 class="font-bold text-primary border-b pb-2">تغيير كلمة المرور وإعدادات الاسترجاع</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold mb-1 text-red-700">كلمة المرور الحالية *</label>
+                                <input type="password" id="cfg-admin-current-pass" placeholder="أدخل كلمة المرور الحالية" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">كلمة المرور الجديدة</label>
+                                <input type="password" id="cfg-admin-pass" placeholder="اتركها فارغة لعدم التغيير" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">تأكيد كلمة المرور الجديدة</label>
+                                <input type="password" id="cfg-admin-pass-confirm" placeholder="أعد كتابة كلمة المرور الجديدة" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">البريد الإلكتروني للاسترجاع</label>
+                                <input type="email" id="cfg-recovery-email" dir="ltr" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">رقم الهاتف للاسترجاع</label>
+                                <input type="text" id="cfg-recovery-phone" dir="ltr" class="w-full px-3 py-2 border rounded-lg text-sm">
+                            </div>
+                        </div>
+                        <button onclick="saveSecuritySettings()" class="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold">حفظ كلمة المرور وإعدادات الأمان</button>
+                    </div>
+
+                    <!-- النشر السحابي المباشر على نفس الرابط (GitHub Pages Live Publish) -->
+                    <div class="bg-white p-5 rounded-2xl border border-amber-300/80 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <h3 class="font-bold text-primary flex items-center gap-2">
+                                <i data-lucide="globe" class="w-4 h-4 text-accent"></i>
+                                <span>النشر السحابي المباشر (لتحديث الموقع عند جميع الزوار على نفس الرابط)</span>
+                            </h3>
+                            <span class="text-[11px] bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-lg border border-emerald-200">موصى به للنشر اليومي</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            عند استضافة الموقع مجاناً على <strong>GitHub Pages</strong>، يمكنك ربط المستودع هنا لمرة واحدة؛ وبعد إضافة أي صوتية أو درس يومي تضغط على زر <strong>«نشر التعديلات فوراً للزوار»</strong> ليتم تحديث الموقع تلقائياً عند كل من يملك الرابط دون تغيير الرابط أبداً:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اسم المستخدم (GitHub Owner)</label>
+                                <input type="text" id="gh-owner" dir="ltr" placeholder="username" class="w-full px-3 py-2 border rounded-lg text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">اسم المستودع (Repo)</label>
+                                <input type="text" id="gh-repo" dir="ltr" placeholder="alsujai-site" class="w-full px-3 py-2 border rounded-lg text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">مسار الملف</label>
+                                <input type="text" id="gh-path" dir="ltr" value="index.html" class="w-full px-3 py-2 border rounded-lg text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">رمز الوصول (Personal Token)</label>
+                                <input type="password" id="gh-token" dir="ltr" placeholder="ghp_..." class="w-full px-3 py-2 border rounded-lg text-xs">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button onclick="saveGithubConfig()" class="bg-stone-800 text-white px-4 py-2 rounded-xl text-xs font-bold">حفظ إعدادات الربط</button>
+                            <button onclick="publishDirectlyToGithub()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow">
+                                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                                <span>نشر التعديلات فوراً على الإنترنت للزوار</span>
+                            </button>
+                            <button onclick="exportStandaloneHTML()" class="bg-accent text-white px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                <span>أو تنزيل ملف index.html</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer class="bg-primary-dark text-stone-300 border-t-4 border-accent mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <h4 id="footer-col1-title" class="text-white font-bold text-sm flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span>
+                    <span>الموقع الرسمي للشيخ أحمد السجاعي</span>
+                </h4>
+                <p id="footer-col1-text" class="text-xs leading-relaxed text-stone-400">
+                    منصة علمية دعوية تعنى بنشر العلم الشرعي المؤصل وفق منهج الكتاب والسنة بفهم سلف الأمة، وتيسير الوصول لدروس وكتب ومقالات الشيخ.
+                </p>
+                <div id="footer-contact-info" class="text-xs text-amber-300/90 space-y-1 pt-1"></div>
+            </div>
+
+            <div class="space-y-3">
+                <h4 id="footer-col2-title" class="text-white font-bold text-sm flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span>
+                    <span>أقسام علمية مختارة</span>
+                </h4>
+                <div id="footer-quick-links" class="grid grid-cols-2 gap-2 text-xs"></div>
+            </div>
+
+            <div class="space-y-3">
+                <h4 id="footer-col3-title" class="text-white font-bold text-sm flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span>
+                    <span>تنبيه وحقوق النشر</span>
+                </h4>
+                <p id="footer-col3-text" class="text-xs leading-relaxed text-stone-400">
+                    يُسمح بنشر وتوزيع المواد العلمية الموجودة في الموقع مجاناً بشرط العزو للمصدر وعدم التغيير أو التحريف.
+                </p>
+            </div>
+        </div>
+        <div class="bg-black/30 py-3.5 px-4 text-center text-xs text-stone-400 border-t border-white/5">
+            <span id="footer-copyright-text">جميع الحقوق محفوظة © الموقع الرسمي للشيخ أحمد بن مصطفى السجاعي</span>
+        </div>
+    </footer>
+
+    <!-- إشعار Toast أنيق -->
+    <div id="toast-notification" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 bg-primary text-white px-5 py-2.5 rounded-full shadow-xl border border-amber-400/50 text-xs font-bold z-[60] transition-all"></div>
+
+    <!-- البيانات المدمجة للموقع (تُحدّث تلقائياً عند التصدير أو النشر السحابي) -->
+    <script id="embedded-site-data" type="application/json">null</script>
+
+    <script>
+        /* =========================================================
+           1. البيانات الافتراضية وبنية الموقع
+           ========================================================= */
+        const defaultSiteData = {
+            identity: {
+                prefix: 'الموقع الرسمي للشيخ',
+                name: 'أحمد بن مصطفى السجاعي',
+                desc: 'دروس علمية مؤصلة، شروحات المتون، مقالات منهجية، وخطب منبرية على منهج الكتاب والسنة',
+                headerFont: "'Aref Ruqaa', serif",
+                logoDataUrl: '',
+                nameImgDataUrl: '',
+                nameImgHeight: 54,
+                colorPrimary: '#142d4c',
+                colorAccent: '#b08938',
+                colorBg: '#f5f3ed',
+                topbarTagline: 'منبر علمي دعوي على منهج الكتاب والسنة',
+                searchPlaceholder: 'ابحث في المقالات، الخطب، الدروس، الكتب...',
+                sidebarHeading: 'أقسام الموقع العلمية',
+                tickerBadge: 'جديد الموقع',
+                btnHideSidebar: 'إخفاء القائمة',
+                btnShowSidebar: 'إظهار القائمة',
+                btnMoreText: 'المزيد »',
+                scheduleBadgeText: 'محدّث',
+                marqueeSpeed: 28,
+                customTickerText: '',
+                footerCol1Title: 'الموقع الرسمي للشيخ أحمد السجاعي',
+                footerCol1Text: 'منصة علمية دعوية تعنى بنشر العلم الشرعي المؤصل وفق منهج الكتاب والسنة بفهم سلف الأمة، وتيسير الوصول لدروس وكتب ومقالات الشيخ.',
+                footerCol2Title: 'أقسام علمية مختارة',
+                footerCol3Title: 'تنبيه وحقوق النشر',
+                footerCol3Text: 'يُسمح بنشر وتوزيع المواد العلمية الموجودة في الموقع مجاناً بشرط العزو للمصدر وعدم التغيير أو التحريف.',
+                footerCopyright: 'جميع الحقوق محفوظة © الموقع الرسمي للشيخ أحمد بن مصطفى السجاعي'
+            },
+            socials: {
+                platforms: [
+                    { id: 'youtube', label: 'يوتيوب', icon: 'youtube', url: 'https://youtube.com' },
+                    { id: 'telegram', label: 'تليجرام', icon: 'send', url: 'https://t.me' },
+                    { id: 'whatsapp', label: 'واتساب', icon: 'message-circle', url: 'https://wa.me' },
+                    { id: 'x', label: 'إكس', icon: 'at-sign', url: 'https://x.com' }
+                ],
+                email: '',
+                phone: ''
+            },
+            security: {
+                password: '224466',
+                recoveryEmail: 'admin@alsujai.com',
+                recoveryPhone: '01000000000'
+            },
+            githubSync: {
+                owner: '',
+                repo: '',
+                path: 'index.html',
+                token: ''
+            },
+            showScheduleColumn: true,
+            scheduleHeading: 'جدول الدروس العلمية',
+            schedule: [
+                { day: 'السبت والثلاثاء', time: 'بعد صلاة المغرب', title: 'شرح كتاب التوحيد للإمام محمد بن عبدالوهاب', location: 'المسجد الكبير / بث مباشر عبر التليجرام' },
+                { day: 'الأربعاء', time: 'بعد صلاة العشاء', title: 'شرح عمدة الأحكام من كلام خير الأنام ﷺ', location: 'المسجد الكبير' }
+            ],
+            homeBlocks: [
+                { id: 'articles', title: 'جديد المقالات والبحوث العلمية', visible: true, count: 4 },
+                { id: 'sermons', title: 'أحدث الخطب المنبرية', visible: true, count: 4 },
+                { id: 'scientific_mix', title: 'أحدث المحاضرات والدروس والدورات العلمية', visible: true, count: 6 },
+                { id: 'books', title: 'جديد الكتب والمؤلفات (PDF)', visible: true, count: 6 }
+            ],
+            sections: [
+                { id: 'home', label: 'الرئيسية', icon: 'home', visible: true, removable: false, isHome: true },
+                { id: 'articles', label: 'جديد المقالات', icon: 'file-text', desc: 'مقالات علمية ومنهجية محررة للشيخ', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'sermons', label: 'الخطب المنبرية', icon: 'mic', desc: 'خطب الجمعة والعيدين الصوتية والمرئية والمفرغة', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'books', label: 'جديد الكتب', icon: 'book-open', desc: 'مؤلفات وشروحات الشيخ بصيغة PDF', visible: true, removable: true, allowedFields: { audio: false, external: true, pdf: true, cover: true, body: true } },
+                { id: 'lectures', label: 'المحاضرات', icon: 'radio', desc: 'المحاضرات العلمية العامة واللقاءات المفتوحة', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'renewed_lessons', label: 'الدروس المتجددة', icon: 'calendar-clock', desc: 'الدروس الأسبوعية المتجددة في الفقه والعقيدة والتفسير', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'courses', label: 'الدورات العلمية', icon: 'graduation-cap', desc: 'الدورات العلمية المكثفة في التأصيل الشرعي', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'women_courses', label: 'الدورات النسائية', icon: 'users', desc: 'الدروس والدورات العلمية الموجهة للأخوات', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'kids_lessons', label: 'دروس الأطفال والناشئين', icon: 'sparkles', desc: 'برامج تربوية وعلمية مبسطة للنشء', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'recorded_texts', label: 'المتون المسجلة', icon: 'headphones', desc: 'قراءات وشروحات المتون العلمية المسجلة', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'responses', label: 'الردود العلمية', icon: 'shield-alert', desc: 'ردود علمية مؤصلة على الشبهات والانحرافات الفكرية', visible: true, removable: true, allowedFields: { audio: true, external: true, pdf: true, cover: false, body: true } },
+                { id: 'videos', label: 'المقاطع المرئية', icon: 'video', desc: 'فوائد ومقاطع مرئية مختارة من دروس الشيخ', visible: true, removable: true, allowedFields: { audio: false, external: true, pdf: false, cover: true, body: true } },
+                { id: 'leaflets', label: 'المطويات العلمية', icon: 'file-badge', desc: 'مطويات ومنشورات دعوية جاهزة للطباعة والنشر', visible: true, removable: true, allowedFields: { audio: false, external: true, pdf: true, cover: true, body: true } }
+            ],
+            items: {
+                articles: [],
+                sermons: [],
+                books: [],
+                lectures: [],
+                renewed_lessons: [],
+                courses: [],
+                women_courses: [],
+                kids_lessons: [],
+                recorded_texts: [],
+                responses: [],
+                videos: [],
+                leaflets: [
+                    {
+                        id: 'sample_leaflet_1',
+                        title: 'مطوية لا حزبية في الإسلام',
+                        date: 'إصدار علمي',
+                        body: 'بيان شرعي مؤصل في لزوم الجماعة والسنة والتحذير من التفرق والتحزب المذموم في دين الله.',
+                        audioUrl: '',
+                        externalUrl: '',
+                        externalLabel: '',
+                        pdfUrl: '',
+                        coverUrl: ''
+                    }
+                ]
+            }
+        };
+
+        let siteData = JSON.parse(JSON.stringify(defaultSiteData));
+        let currentActiveSection = 'home';
+        let currentAdminTab = 'identity';
+        let currentEditingContentSecId = 'articles';
+        let tempUploadedMedia = { audio: '', pdf: '', cover: '' };
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+
+        /* =========================================================
+           2. التخزين الدائم (IndexedDB + Embedded JSON)
+           ========================================================= */
+        const DB_NAME = 'AlsujaiOfficialSiteDB';
+        const STORE_NAME = 'siteStateStore';
+
+        function openSiteDB() {
+            return new Promise((resolve, reject) => {
+                const req = indexedDB.open(DB_NAME, 1);
+                req.onupgradeneeded = e => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME);
+                    }
+                };
+                req.onsuccess = e => resolve(e.target.result);
+                req.onerror = e => reject(e.target.error);
+            });
+        }
+
+        async function loadSiteData() {
+            try {
+                // أولاً: فحص البيانات المدمجة داخل الملف المُصدّر (للزوار)
+                const embeddedEl = document.getElementById('embedded-site-data');
+                let embeddedParsed = null;
+                if (embeddedEl && embeddedEl.textContent.trim() && embeddedEl.textContent.trim() !== 'null') {
+                    embeddedParsed = JSON.parse(embeddedEl.textContent);
+                }
+
+                // ثانياً: فحص IndexedDB للمشرف المحلي
+                const db = await openSiteDB();
+                const saved = await new Promise((resolve) => {
+                    const tx = db.transaction(STORE_NAME, 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const getReq = store.get('mainData');
+                    getReq.onsuccess = () => resolve(getReq.result || null);
+                    getReq.onerror = () => resolve(null);
+                });
+
+                if (saved) {
+                    siteData = Object.assign({}, JSON.parse(JSON.stringify(defaultSiteData)), saved);
+                } else if (embeddedParsed) {
+                    siteData = Object.assign({}, JSON.parse(JSON.stringify(defaultSiteData)), embeddedParsed);
+                }
+            } catch (err) {
+                console.warn('Fallback to default site data:', err);
+            }
+            ensureDataIntegrity();
+        }
+
+        async function persistSiteData() {
+            try {
+                const db = await openSiteDB();
+                await new Promise((resolve, reject) => {
+                    const tx = db.transaction(STORE_NAME, 'readwrite');
+                    const store = tx.objectStore(STORE_NAME);
+                    const putReq = store.put(siteData, 'mainData');
+                    putReq.onsuccess = () => resolve();
+                    putReq.onerror = e => reject(e.target.error);
+                });
+            } catch (err) {
+                console.error('Error saving to IndexedDB:', err);
+            }
+        }
+
+        function stripFadila(str) {
+            if (typeof str !== 'string') return str || '';
+            return str.replace(/فضيلة\s+/g, '').replace(/لفضيلة\s+/g, 'لل');
+        }
+
+        function ensureDataIntegrity() {
+            siteData.identity = Object.assign({}, defaultSiteData.identity, siteData.identity || {});
+            siteData.socials = Object.assign({}, defaultSiteData.socials, siteData.socials || {});
+            siteData.security = Object.assign({}, defaultSiteData.security, siteData.security || {});
+            siteData.githubSync = Object.assign({}, defaultSiteData.githubSync, siteData.githubSync || {});
+            if (!siteData.items) siteData.items = {};
+            if (!Array.isArray(siteData.schedule)) siteData.schedule = [];
+            if (!Array.isArray(siteData.homeBlocks)) siteData.homeBlocks = JSON.parse(JSON.stringify(defaultSiteData.homeBlocks));
+            if (!Array.isArray(siteData.sections)) siteData.sections = JSON.parse(JSON.stringify(defaultSiteData.sections));
+
+            // إزالة كلمة فضيلة من النصوص
+            siteData.identity.prefix = stripFadila(siteData.identity.prefix);
+            siteData.identity.name = stripFadila(siteData.identity.name);
+            siteData.identity.desc = stripFadila(siteData.identity.desc);
+            siteData.identity.footerCol1Title = stripFadila(siteData.identity.footerCol1Title);
+            siteData.identity.footerCopyright = stripFadila(siteData.identity.footerCopyright);
+
+            // ترحيل روابط التواصل القديمة
+            if (!Array.isArray(siteData.socials.platforms)) {
+                const migrated = [];
+                if (siteData.socials.youtube) migrated.push({ id: 'youtube', label: 'يوتيوب', icon: 'youtube', url: siteData.socials.youtube });
+                if (siteData.socials.telegram) migrated.push({ id: 'telegram', label: 'تليجرام', icon: 'send', url: siteData.socials.telegram });
+                if (siteData.socials.whatsapp) migrated.push({ id: 'whatsapp', label: 'واتساب', icon: 'message-circle', url: siteData.socials.whatsapp });
+                if (siteData.socials.x) migrated.push({ id: 'x', label: 'إكس', icon: 'at-sign', url: siteData.socials.x });
+                siteData.socials.platforms = migrated;
+            }
+
+            siteData.sections.forEach(sec => {
+                sec.label = stripFadila(sec.label);
+                sec.desc = stripFadila(sec.desc);
+                if (!sec.isHome) {
+                    sec.removable = true;
+                    if (!Array.isArray(siteData.items[sec.id])) siteData.items[sec.id] = [];
+                    if (!sec.allowedFields) {
+                        sec.allowedFields = { audio: true, external: true, pdf: true, cover: true, body: true };
+                    }
+                }
+            });
+        }
+
+        /* =========================================================
+           3. تطبيق الهوية والمظهر والتنقل
+           ========================================================= */
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function escapeAttr(str) {
+            return escapeHtml(str).replace(/'/g, '&#39;');
+        }
+
+        function applySiteIdentity() {
+            const id = siteData.identity;
+            document.documentElement.style.setProperty('--color-primary', id.colorPrimary || '#142d4c');
+            document.documentElement.style.setProperty('--color-accent', id.colorAccent || '#b08938');
+            document.documentElement.style.setProperty('--color-bg', id.colorBg || '#f5f3ed');
+            document.documentElement.style.setProperty('--header-font', id.headerFont || "'Aref Ruqaa', serif");
+
+            document.title = `${id.prefix} ${id.name}`;
+            document.getElementById('site-prefix-label').textContent = id.prefix;
+            document.getElementById('site-sheikh-name').textContent = id.name;
+            document.getElementById('site-sheikh-desc').textContent = id.desc;
+            document.getElementById('topbar-tagline').textContent = id.topbarTagline || '';
+            document.getElementById('global-search-input').placeholder = id.searchPlaceholder || 'ابحث في الموقع...';
+            document.getElementById('sidebar-heading-text').textContent = id.sidebarHeading || 'أقسام الموقع العلمية';
+
+            // الشعار
+            const logoImg = document.getElementById('site-logo-img');
+            const logoFallback = document.getElementById('site-logo-fallback');
+            if (id.logoDataUrl) {
+                logoImg.src = id.logoDataUrl;
+                logoImg.classList.remove('hidden');
+                logoFallback.classList.add('hidden');
+            } else {
+                logoImg.classList.add('hidden');
+                logoFallback.classList.remove('hidden');
+            }
+
+            // صورة اسم الشيخ أو الخط
+            const nameImg = document.getElementById('site-name-img');
+            const nameText = document.getElementById('site-sheikh-name');
+            if (id.nameImgDataUrl) {
+                nameImg.src = id.nameImgDataUrl;
+                nameImg.style.height = (id.nameImgHeight || 54) + 'px';
+                nameImg.classList.remove('hidden');
+                nameText.classList.add('hidden');
+            } else {
+                nameImg.classList.add('hidden');
+                nameText.classList.remove('hidden');
+            }
+
+            // شارة شريط الأخبار وأزرار الواجهة
+            const tickerBadge = document.getElementById('ticker-badge-label');
+            if (tickerBadge) {
+                tickerBadge.innerHTML = `<i data-lucide="bell" class="w-3.5 h-3.5"></i><span>${escapeHtml(id.tickerBadge || 'جديد الموقع')}</span>`;
+            }
+
+            const sidebarPanel = document.getElementById('right-sidebar');
+            const toggleTextEl = document.getElementById('toggle-sidebar-text');
+            if (toggleTextEl) {
+                const isCollapsed = sidebarPanel && sidebarPanel.classList.contains('sidebar-collapsed');
+                toggleTextEl.textContent = isCollapsed ? (id.btnShowSidebar || 'إظهار القائمة') : (id.btnHideSidebar || 'إخفاء القائمة');
+            }
+
+            const schedBadgeEl = document.getElementById('schedule-status-badge');
+            if (schedBadgeEl) {
+                schedBadgeEl.textContent = id.scheduleBadgeText || 'محدّث';
+            }
+
+            // الفوتر
+            document.getElementById('footer-col1-title').innerHTML = `<span class="w-2 h-2 rounded-full bg-accent"></span><span>${escapeHtml(id.footerCol1Title)}</span>`;
+            document.getElementById('footer-col1-text').textContent = id.footerCol1Text || '';
+            document.getElementById('footer-col2-title').innerHTML = `<span class="w-2 h-2 rounded-full bg-accent"></span><span>${escapeHtml(id.footerCol2Title)}</span>`;
+            document.getElementById('footer-col3-title').innerHTML = `<span class="w-2 h-2 rounded-full bg-accent"></span><span>${escapeHtml(id.footerCol3Title)}</span>`;
+            document.getElementById('footer-col3-text').textContent = id.footerCol3Text || '';
+            document.getElementById('footer-copyright-text').textContent = id.footerCopyright || '';
+
+            // روابط التواصل
+            const soc = siteData.socials || {};
+            const platforms = Array.isArray(soc.platforms) ? soc.platforms : [];
+            document.getElementById('topbar-socials').innerHTML = platforms
+                .filter(s => s.url)
+                .map(s => `<a href="${escapeAttr(s.url)}" target="_blank" rel="noopener" title="${escapeAttr(s.label)}" class="hover:text-amber-300 transition inline-flex items-center gap-1"><i data-lucide="${s.icon || 'globe'}" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">${escapeHtml(s.label)}</span></a>`)
+                .join('');
+
+            const footerContact = document.getElementById('footer-contact-info');
+            let contactLines = [];
+            if (soc.email) contactLines.push(`<div>البريد الرسمي: <span dir="ltr">${escapeHtml(soc.email)}</span></div>`);
+            if (soc.phone) contactLines.push(`<div>التنسيق والهاتف: <span dir="ltr">${escapeHtml(soc.phone)}</span></div>`);
+            footerContact.innerHTML = contactLines.join('');
+
+            lucide.createIcons();
+        }
+
+        function renderNavigationAndSidebar() {
+            const visibleSections = siteData.sections.filter(s => s.visible !== false);
+
+            // شريط التنقل العلوي
+            const topNavList = document.getElementById('top-nav-list');
+            topNavList.innerHTML = visibleSections.map(sec => {
+                const isActive = currentActiveSection === sec.id;
+                return `
+                    <button onclick="navigateToSection('${sec.id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 transition whitespace-nowrap ${isActive ? 'bg-primary text-white shadow-sm' : 'text-primary hover:bg-stone-100'}">
+                        <i data-lucide="${sec.icon || 'folder'}" class="w-3.5 h-3.5 ${isActive ? 'text-amber-300' : 'text-accent'}"></i>
+                        <span>${escapeHtml(sec.label)}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // القائمة الجانبية اليمنى
+            const sidebarList = document.getElementById('sidebar-sections-list');
+            sidebarList.innerHTML = visibleSections.map(sec => {
+                const isActive = currentActiveSection === sec.id;
+                const count = sec.isHome ? '' : (siteData.items[sec.id] ? siteData.items[sec.id].length : 0);
+                return `
+                    <button onclick="navigateToSection('${sec.id}')" class="w-full px-3 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition ${isActive ? 'bg-primary text-white shadow-sm' : 'text-primary hover:bg-stone-50'}">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="${sec.icon || 'folder'}" class="w-4 h-4 ${isActive ? 'text-amber-300' : 'text-accent'}"></i>
+                            <span>${escapeHtml(sec.label)}</span>
+                        </span>
+                        ${sec.isHome ? `<span class="text-[11px] opacity-70">»</span>` : `<span class="px-2 py-0.5 rounded-md text-[11px] ${isActive ? 'bg-white/20 text-white' : 'bg-stone-100 text-gray-600'}">${count}</span>`}
+                    </button>
+                `;
+            }).join('');
+
+            // روابط مختارة في الفوتر
+            const footerLinks = document.getElementById('footer-quick-links');
+            footerLinks.innerHTML = visibleSections.filter(s => !s.isHome).slice(0, 8).map(sec => `
+                <button onclick="navigateToSection('${sec.id}')" class="text-right text-stone-400 hover:text-amber-300 transition truncate">
+                    • ${escapeHtml(sec.label)}
+                </button>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function renderNewsTicker() {
+            const track = document.getElementById('news-ticker-track');
+            const speed = siteData.identity.marqueeSpeed || 28;
+            track.style.setProperty('--marquee-duration', speed + 's');
+
+            if (siteData.identity.customTickerText) {
+                track.innerHTML = `<span>✦ ${escapeHtml(siteData.identity.customTickerText)}</span><span>✦ ${escapeHtml(siteData.identity.customTickerText)}</span>`;
+                return;
+            }
+
+            let latestEntries = [];
+            siteData.sections.filter(s => !s.isHome && s.visible !== false).forEach(sec => {
+                const arr = siteData.items[sec.id] || [];
+                arr.slice(0, 2).forEach(item => {
+                    latestEntries.push({ secId: sec.id, secLabel: sec.label, title: item.title });
+                });
+            });
+
+            if (!latestEntries.length) {
+                track.innerHTML = `<span>✦ مرحباً بكم في ${escapeHtml(siteData.identity.prefix)} ${escapeHtml(siteData.identity.name)}</span>`;
+                return;
+            }
+
+            const itemsHtml = latestEntries.map(e => `
+                <button onclick="navigateToSection('${e.secId}')" class="hover:text-accent transition inline-flex items-center gap-1.5">
+                    <span class="text-accent">◆</span>
+                    <span class="font-bold">${escapeHtml(e.secLabel)}:</span>
+                    <span>${escapeHtml(e.title)}</span>
+                </button>
+            `).join('');
+
+            track.innerHTML = itemsHtml + itemsHtml;
+        }
+
+        /* =========================================================
+           4. عرض الصفحة الرئيسية والأقسام والمواد
+           ========================================================= */
+        function navigateToSection(secId) {
+            currentActiveSection = secId;
+            renderNavigationAndSidebar();
+
+            const homeView = document.getElementById('view-home');
+            const secView = document.getElementById('view-section');
+
+            if (secId === 'home') {
+                secView.classList.add('hidden');
+                homeView.classList.remove('hidden');
+                renderHomeContent();
+            } else {
+                homeView.classList.add('hidden');
+                secView.classList.remove('hidden');
+                renderSectionView(secId);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderHomeContent() {
+            // عمود جدول الدروس العلمية
+            const schedCol = document.getElementById('home-schedule-column');
+            if (siteData.showScheduleColumn === false) {
+                schedCol.classList.add('hidden');
+            } else {
+                schedCol.classList.remove('hidden');
+                document.getElementById('schedule-card-heading').innerHTML = `
+                    <i data-lucide="clock" class="w-4 h-4 text-accent"></i>
+                    <span>${escapeHtml(siteData.scheduleHeading || 'جدول الدروس العلمية')}</span>
+                `;
+                const schedList = document.getElementById('home-schedule-list');
+                if (!siteData.schedule.length) {
+                    schedList.innerHTML = '<div class="border border-dashed border-stone-200 rounded-xl py-8 text-center text-xs text-gray-400">لا توجد دروس مجدولة حالياً.</div>';
+                } else {
+                    schedList.innerHTML = `<div class="space-y-2.5">` + siteData.schedule.map(s => `
+                        <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80 hover:border-amber-300 transition">
+                            <div class="flex items-center justify-between gap-2 text-[11px] font-bold text-accent mb-1">
+                                <span>${escapeHtml(s.day)}</span>
+                                <span>${escapeHtml(s.time || '')}</span>
+                            </div>
+                            <div class="font-bold text-primary text-xs leading-snug">${escapeHtml(s.title)}</div>
+                            ${s.location ? `<div class="text-[11px] text-gray-500 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-accent"></i><span>${escapeHtml(s.location)}</span></div>` : ''}
+                        </div>
+                    `).join('') + `</div>`;
+                }
+            }
+
+            // بطاقات الرئيسية
+            const container = document.getElementById('home-blocks-container');
+            const visibleBlocks = siteData.homeBlocks.filter(b => b.visible !== false);
+
+            container.innerHTML = visibleBlocks.map(block => {
+                if (block.id === 'scientific_mix') {
+                    let mixed = [];
+                    const mixIds = ['lectures', 'renewed_lessons', 'courses', 'women_courses', 'kids_lessons', 'recorded_texts', 'responses', 'videos', 'leaflets'];
+                    mixIds.forEach(sid => {
+                        const secObj = siteData.sections.find(s => s.id === sid);
+                        if (secObj && secObj.visible !== false) {
+                            (siteData.items[sid] || []).forEach(it => {
+                                mixed.push({ secId: sid, secLabel: secObj.label, item: it });
+                            });
+                        }
+                    });
+                    const sliced = mixed.slice(0, block.count || 6);
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+                            <div class="bg-stone-50/90 px-5 py-3.5 border-b border-stone-200 flex items-center justify-between">
+                                <h2 class="font-bold text-primary text-sm md:text-base flex items-center gap-2">
+                                    <i data-lucide="layers" class="w-4 h-4 text-accent"></i>
+                                    <span>${escapeHtml(block.title)}</span>
+                                </h2>
+                            </div>
+                            <div class="p-4 divide-y divide-stone-100">
+                                ${sliced.length ? sliced.map(entry => `
+                                    <div class="py-2.5 flex flex-wrap items-center justify-between gap-2">
+                                        <div class="flex items-center gap-2.5 min-w-0">
+                                            <span class="px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-accent text-[11px] font-bold shrink-0">${escapeHtml(entry.secLabel)}</span>
+                                            <button onclick="openItemModal('${entry.secId}', '${entry.item.id}')" class="font-bold text-xs sm:text-sm text-primary hover:text-accent text-right truncate">
+                                                ${escapeHtml(entry.item.title)}
+                                            </button>
+                                        </div>
+                                        <button onclick="navigateToSection('${entry.secId}')" class="text-xs font-bold text-primary hover:text-accent shrink-0">فتح القسم ←</button>
+                                    </div>
+                                `).join('') : '<p class="text-xs text-gray-400 text-center py-6">لا توجد مواد مضافة حالياً.</p>'}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const secObj = siteData.sections.find(s => s.id === block.id);
+                if (!secObj) return '';
+                const list = (siteData.items[block.id] || []).slice(0, block.count || 4);
+
+                if (block.id === 'books') {
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+                            <div class="bg-stone-50/90 px-5 py-3.5 border-b border-stone-200 flex items-center justify-between">
+                                <h2 class="font-bold text-primary text-sm md:text-base flex items-center gap-2">
+                                    <i data-lucide="${secObj.icon || 'book-open'}" class="w-4 h-4 text-accent"></i>
+                                    <span>${escapeHtml(block.title)}</span>
+                                </h2>
+                                <button onclick="navigateToSection('books')" class="text-xs font-bold text-accent hover:underline">${escapeHtml(siteData.identity.btnMoreText || 'المزيد »')}</button>
+                            </div>
+                            <div class="p-4">
+                                ${list.length ? `
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                        ${list.map(b => renderBookCard(b)).join('')}
+                                    </div>
+                                ` : '<p class="text-xs text-gray-400 text-center py-6">لا توجد كتب مضافة حالياً.</p>'}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden">
+                        <div class="bg-stone-50/90 px-5 py-3.5 border-b border-stone-200 flex items-center justify-between">
+                            <h2 class="font-bold text-primary text-sm md:text-base flex items-center gap-2">
+                                <i data-lucide="${secObj.icon || 'file-text'}" class="w-4 h-4 text-accent"></i>
+                                <span>${escapeHtml(block.title)}</span>
+                            </h2>
+                            <button onclick="navigateToSection('${block.id}')" class="text-xs font-bold text-accent hover:underline">${escapeHtml(siteData.identity.btnMoreText || 'المزيد »')}</button>
+                        </div>
+                        <div class="p-4 divide-y divide-stone-100">
+                            ${list.length ? list.map(item => renderCompactItemRow(block.id, item)).join('') : '<p class="text-xs text-gray-400 text-center py-6">لا توجد مواد منشورة في هذا القسم حالياً.</p>'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        function renderBookCard(b) {
+            return `
+                <div class="border border-stone-200 rounded-2xl p-3.5 flex flex-col items-center text-center bg-stone-50/40 hover:shadow-md transition">
+                    <div class="w-28 h-36 rounded-xl bg-primary/10 border border-stone-200 overflow-hidden flex items-center justify-center mb-3">
+                        ${b.coverUrl ? `<img src="${escapeAttr(b.coverUrl)}" alt="${escapeAttr(b.title)}" class="w-full h-full object-cover">` : `<i data-lucide="book-open" class="w-10 h-10 text-primary"></i>`}
+                    </div>
+                    <h4 class="font-bold text-primary text-xs line-clamp-2 mb-3">${escapeHtml(b.title)}</h4>
+                    <div class="mt-auto w-full flex flex-col gap-1.5">
+                        ${b.pdfUrl ? `<a href="${escapeAttr(b.pdfUrl)}" download="${escapeAttr(b.title)}.pdf" target="_blank" class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 hover:opacity-95"><i data-lucide="download" class="w-3.5 h-3.5"></i><span>تحميل PDF</span></a>` : ''}
+                        ${b.externalUrl ? `<a href="${escapeAttr(b.externalUrl)}" target="_blank" rel="noopener" class="w-full bg-accent text-white py-1.5 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>${escapeHtml(b.externalLabel || 'فتح الرابط')}</span></a>` : ''}
+                        ${(!b.pdfUrl && !b.externalUrl) ? `<button onclick="openItemModal('books', '${b.id}')" class="w-full bg-stone-200 text-primary py-1.5 rounded-xl text-xs font-bold">عرض التفاصيل</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCompactItemRow(secId, item) {
+            return `
+                <div class="py-3 flex flex-wrap items-center justify-between gap-3">
+                    <div class="min-w-0 flex-1">
+                        <button onclick="openItemModal('${secId}', '${item.id}')" class="font-bold text-primary hover:text-accent text-xs sm:text-sm text-right block">
+                            ${escapeHtml(item.title)}
+                        </button>
+                        ${item.date ? `<span class="text-[11px] text-gray-400 mt-0.5 block">${escapeHtml(item.date)}</span>` : ''}
+                    </div>
+                    <div class="flex flex-wrap items-center gap-1.5 shrink-0">
+                        ${item.audioUrl ? `<button onclick="playAudioTrack('${escapeAttr(item.title)}', '${escapeAttr(item.audioUrl)}')" class="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-bold inline-flex items-center gap-1 hover:opacity-90"><i data-lucide="play" class="w-3.5 h-3.5"></i><span>استماع</span></button>` : ''}
+                        ${item.externalUrl ? `<a href="${escapeAttr(item.externalUrl)}" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-bold inline-flex items-center gap-1 hover:opacity-90"><i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>${escapeHtml(item.externalLabel || 'رابط خارجي')}</span></a>` : ''}
+                        ${item.pdfUrl ? `<a href="${escapeAttr(item.pdfUrl)}" download="${escapeAttr(item.title)}.pdf" target="_blank" class="px-3 py-1.5 rounded-lg bg-stone-100 border border-stone-300 text-primary text-xs font-bold inline-flex items-center gap-1 hover:bg-stone-200"><i data-lucide="file-text" class="w-3.5 h-3.5"></i><span>PDF</span></a>` : ''}
+                        ${item.body ? `<button onclick="openItemModal('${secId}', '${item.id}')" class="px-3 py-1.5 rounded-lg bg-amber-50 text-accent border border-amber-200 text-xs font-bold">قراءة</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSectionView(secId) {
+            const sec = siteData.sections.find(s => s.id === secId);
+            if (!sec) return;
+            document.getElementById('section-view-title').innerHTML = `
+                <i data-lucide="${sec.icon || 'folder'}" class="w-5 h-5 text-accent"></i>
+                <span>${escapeHtml(sec.label)}</span>
+            `;
+            document.getElementById('section-view-desc').textContent = sec.desc || '';
+
+            const items = siteData.items[secId] || [];
+            const container = document.getElementById('section-items-container');
+            if (!items.length) {
+                container.innerHTML = `<div class="bg-white rounded-2xl border border-stone-200 p-10 text-center text-sm text-gray-400">لا توجد مواد منشورة في قسم «${escapeHtml(sec.label)}» حالياً.</div>`;
+                lucide.createIcons();
+                return;
+            }
+
+            if (secId === 'books') {
+                container.innerHTML = `<div class="bg-white rounded-2xl border border-stone-200 p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">${items.map(b => renderBookCard(b)).join('')}</div>`;
+            } else {
+                container.innerHTML = `<div class="bg-white rounded-2xl border border-stone-200 p-5 divide-y divide-stone-100">${items.map(it => renderCompactItemRow(secId, it)).join('')}</div>`;
+            }
+            lucide.createIcons();
+        }
+
+        function executeGlobalSearch() {
+            const q = document.getElementById('global-search-input').value.trim().toLowerCase();
+            if (!q) return navigateToSection('home');
+
+            currentActiveSection = 'search';
+            renderNavigationAndSidebar();
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-section').classList.remove('hidden');
+            document.getElementById('section-view-title').innerHTML = `<i data-lucide="search" class="w-5 h-5 text-accent"></i><span>نتائج البحث عن: «${escapeHtml(q)}»</span>`;
+            document.getElementById('section-view-desc').textContent = '';
+
+            let resultsHtml = [];
+            siteData.sections.filter(s => !s.isHome && s.visible !== false).forEach(sec => {
+                (siteData.items[sec.id] || []).forEach(it => {
+                    if ((it.title && it.title.toLowerCase().includes(q)) || (it.body && it.body.toLowerCase().includes(q))) {
+                        resultsHtml.push(`
+                            <div class="py-3">
+                                <span class="text-[11px] font-bold text-accent bg-amber-50 px-2 py-0.5 rounded border border-amber-200">${escapeHtml(sec.label)}</span>
+                                ${renderCompactItemRow(sec.id, it)}
+                            </div>
+                        `);
+                    }
+                });
+            });
+
+            const container = document.getElementById('section-items-container');
+            container.innerHTML = resultsHtml.length
+                ? `<div class="bg-white rounded-2xl border border-stone-200 p-5 divide-y divide-stone-100">${resultsHtml.join('')}</div>`
+                : `<div class="bg-white rounded-2xl border border-stone-200 p-10 text-center text-sm text-gray-400">لم يتم العثور على نتائج مطابقة لبحثك.</div>`;
+            lucide.createIcons();
+        }
+
+        function openItemModal(secId, itemId) {
+            const item = (siteData.items[secId] || []).find(i => i.id === itemId);
+            const sec = siteData.sections.find(s => s.id === secId);
+            if (!item) return;
+
+            document.getElementById('reader-modal-title').textContent = item.title;
+            document.getElementById('reader-modal-meta').innerHTML = `
+                <span>القسم: <strong>${escapeHtml(sec ? sec.label : '')}</strong></span>
+                ${item.date ? `<span>• التاريخ: ${escapeHtml(item.date)}</span>` : ''}
+            `;
+            document.getElementById('reader-modal-body').textContent = item.body || 'لا يوجد نص مرفق لهذه المادة.';
+
+            let actions = [];
+            if (item.audioUrl) {
+                actions.push(`<button onclick="closeReaderModal(); playAudioTrack('${escapeAttr(item.title)}', '${escapeAttr(item.audioUrl)}')" class="bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold">استماع للمادة</button>`);
+            }
+            if (item.externalUrl) {
+                actions.push(`<a href="${escapeAttr(item.externalUrl)}" target="_blank" rel="noopener" class="bg-accent text-white px-4 py-2 rounded-xl text-xs font-bold">${escapeHtml(item.externalLabel || 'فتح الرابط الخارجي')}</a>`);
+            }
+            if (item.pdfUrl) {
+                actions.push(`<a href="${escapeAttr(item.pdfUrl)}" download="${escapeAttr(item.title)}.pdf" target="_blank" class="bg-stone-200 text-primary px-4 py-2 rounded-xl text-xs font-bold">تحميل PDF</a>`);
+            }
+            document.getElementById('reader-modal-actions').innerHTML = actions.join('');
+            document.getElementById('reader-modal').classList.remove('hidden');
+        }
+
+        function closeReaderModal() {
+            document.getElementById('reader-modal').classList.add('hidden');
+        }
+
+        /* =========================================================
+           5. المشغل الصوتي والتمرير الأفقي بالسحب والأسهم
+           ========================================================= */
+        function playAudioTrack(title, url) {
+            const box = document.getElementById('floating-audio-player');
+            const audio = document.getElementById('main-audio-element');
+            document.getElementById('player-track-title').textContent = title;
+            audio.src = url;
+            box.classList.remove('hidden');
+            audio.play().catch(() => {});
+        }
+
+        function closeAudioPlayer() {
+            const box = document.getElementById('floating-audio-player');
+            const audio = document.getElementById('main-audio-element');
+            audio.pause();
+            audio.src = '';
+            box.classList.add('hidden');
+        }
+
+        function toggleRightSidebar() {
+            const panel = document.getElementById('right-sidebar');
+            if (!panel) return;
+            if (panel.classList.contains('sidebar-collapsed')) expandRightSidebar();
+            else collapseRightSidebar();
+        }
+
+        function collapseRightSidebar() {
+            const panel = document.getElementById('right-sidebar');
+            if (!panel) return;
+            panel.classList.add('sidebar-collapsed');
+            document.getElementById('toggle-sidebar-text').textContent = siteData.identity.btnShowSidebar || 'إظهار القائمة';
+        }
+
+        function expandRightSidebar() {
+            const panel = document.getElementById('right-sidebar');
+            if (!panel) return;
+            panel.classList.remove('sidebar-collapsed');
+            document.getElementById('toggle-sidebar-text').textContent = siteData.identity.btnHideSidebar || 'إخفاء القائمة';
+        }
+
+        function scrollNavBar(delta) {
+            const scroller = document.getElementById('top-nav-scroller');
+            if (scroller) scroller.scrollBy({ left: delta, behavior: 'smooth' });
+        }
+
+        function scrollAdminTabs(delta) {
+            const scroller = document.getElementById('admin-tabs-scroller');
+            if (scroller) scroller.scrollBy({ left: delta, behavior: 'smooth' });
+        }
+
+        function enableDragScroll(el) {
+            if (!el) return;
+            let isDown = false, startX = 0, scrollLeft = 0;
+            el.addEventListener('mousedown', e => {
+                isDown = true;
+                startX = e.pageX - el.offsetLeft;
+                scrollLeft = el.scrollLeft;
+            });
+            el.addEventListener('mouseleave', () => { isDown = false; });
+            el.addEventListener('mouseup', () => { isDown = false; });
+            el.addEventListener('mousemove', e => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - el.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                el.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast-notification');
+            t.textContent = msg;
+            t.classList.remove('hidden');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => t.classList.add('hidden'), 3200);
+        }
+
+        /* =========================================================
+           6. الدخول السري للوحة التحكم وإدارتها الشاملة
+           ========================================================= */
+        function handleLogoSecretClick() {
+            logoClickCount++;
+            clearTimeout(logoClickTimer);
+            if (logoClickCount >= 3) {
+                logoClickCount = 0;
+                openAdminLoginModal();
+            } else {
+                logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1200);
+            }
+        }
+
+        function openAdminLoginModal() {
+            document.getElementById('admin-password-input').value = '';
+            backToLoginStep();
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        function showRecoveryStep() {
+            document.getElementById('login-step-form').classList.add('hidden');
+            document.getElementById('recovery-step-form').classList.remove('hidden');
+        }
+
+        function backToLoginStep() {
+            document.getElementById('recovery-step-form').classList.add('hidden');
+            document.getElementById('login-step-form').classList.remove('hidden');
+        }
+
+        function verifyAdminLogin() {
+            const val = document.getElementById('admin-password-input').value;
+            if (val === (siteData.security.password || '224466')) {
+                closeLoginModal();
+                openAdminDashboard();
+            } else {
+                showToast('كلمة المرور غير صحيحة');
+            }
+        }
+
+        async function processPasswordRecovery() {
+            const contact = document.getElementById('recovery-contact-input').value.trim();
+            const newPass = document.getElementById('recovery-new-pass').value.trim();
+            if (!contact || !newPass) return showToast('يرجى إدخال بيانات الاسترداد وكلمة المرور الجديدة');
+
+            if (contact === siteData.security.recoveryEmail || contact === siteData.security.recoveryPhone) {
+                siteData.security.password = newPass;
+                await persistSiteData();
+                showToast('تمت إعادة تعيين كلمة المرور بنجاح');
+                backToLoginStep();
+            } else {
+                showToast('البريد الإلكتروني أو رقم الهاتف غير مطابق');
+            }
+        }
+
+        function openAdminDashboard() {
+            buildAdminTabsBar();
+            populateAdminForms();
+            switchAdminTab('identity');
+            document.getElementById('admin-dashboard-modal').classList.remove('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('admin-dashboard-modal').classList.add('hidden');
+        }
+
+        function buildAdminTabsBar() {
+            const bar = document.getElementById('admin-tabs-bar');
+            const staticTabs = [
+                { id: 'identity', label: 'الهوية والمظهر' },
+                { id: 'homelayout', label: 'تخصيص الرئيسية' },
+                { id: 'sections', label: 'إدارة الأقسام' },
+                { id: 'schedule', label: 'جدول الدروس' }
+            ];
+            const sectionTabs = siteData.sections.filter(s => !s.isHome).map(s => ({
+                id: 'sec_' + s.id,
+                secId: s.id,
+                label: s.label
+            }));
+            const endTabs = [
+                { id: 'socials', label: 'روابط التواصل' },
+                { id: 'security', label: 'الأمان والنشر المباشر' }
+            ];
+
+            const allTabs = [...staticTabs, ...sectionTabs, ...endTabs];
+            bar.innerHTML = allTabs.map(t => {
+                const isActive = currentAdminTab === t.id;
+                return `
+                    <button onclick="switchAdminTab('${t.id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${isActive ? 'bg-primary text-white shadow-sm' : 'bg-stone-100 text-gray-700 hover:bg-stone-200'}">
+                        ${escapeHtml(t.label)}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function switchAdminTab(tabId) {
+            currentAdminTab = tabId;
+            buildAdminTabsBar();
+            document.querySelectorAll('.admin-panel').forEach(p => p.classList.add('hidden'));
+
+            if (tabId.startsWith('sec_')) {
+                const secId = tabId.replace('sec_', '');
+                currentEditingContentSecId = secId;
+                document.getElementById('admin-tab-content').classList.remove('hidden');
+                openContentEditorForSection(secId);
+            } else {
+                const panel = document.getElementById('admin-tab-' + tabId);
+                if (panel) panel.classList.remove('hidden');
+            }
+        }
+
+        function populateAdminForms() {
+            const id = siteData.identity;
+            document.getElementById('cfg-prefix').value = id.prefix || '';
+            document.getElementById('cfg-name').value = id.name || '';
+            document.getElementById('cfg-desc').value = id.desc || '';
+            document.getElementById('cfg-header-font').value = id.headerFont || "'Aref Ruqaa', serif";
+            document.getElementById('cfg-name-img-height').value = id.nameImgHeight || 54;
+            document.getElementById('cfg-color-primary').value = id.colorPrimary || '#142d4c';
+            document.getElementById('cfg-color-accent').value = id.colorAccent || '#b08938';
+            document.getElementById('cfg-color-bg').value = id.colorBg || '#f5f3ed';
+
+            document.getElementById('cfg-topbar-tagline').value = id.topbarTagline || '';
+            document.getElementById('cfg-search-placeholder').value = id.searchPlaceholder || '';
+            document.getElementById('cfg-sidebar-heading').value = id.sidebarHeading || '';
+            document.getElementById('cfg-ticker-badge').value = id.tickerBadge || 'جديد الموقع';
+            document.getElementById('cfg-btn-hide-sidebar').value = id.btnHideSidebar || 'إخفاء القائمة';
+            document.getElementById('cfg-btn-show-sidebar').value = id.btnShowSidebar || 'إظهار القائمة';
+            document.getElementById('cfg-btn-more-text').value = id.btnMoreText || 'المزيد »';
+            document.getElementById('cfg-schedule-badge-text').value = id.scheduleBadgeText || 'محدّث';
+            document.getElementById('cfg-marquee-speed').value = id.marqueeSpeed || 28;
+            document.getElementById('cfg-custom-ticker').value = id.customTickerText || '';
+            document.getElementById('cfg-footer-col1-title').value = id.footerCol1Title || '';
+            document.getElementById('cfg-footer-col1-text').value = id.footerCol1Text || '';
+            document.getElementById('cfg-footer-col2-title').value = id.footerCol2Title || '';
+            document.getElementById('cfg-footer-col3-title').value = id.footerCol3Title || '';
+            document.getElementById('cfg-footer-col3-text').value = id.footerCol3Text || '';
+            document.getElementById('cfg-footer-copyright').value = id.footerCopyright || '';
+
+            document.getElementById('cfg-show-schedule-col').checked = siteData.showScheduleColumn !== false;
+            document.getElementById('cfg-schedule-heading').value = siteData.scheduleHeading || 'جدول الدروس العلمية';
+            document.getElementById('cfg-social-email').value = siteData.socials.email || '';
+            document.getElementById('cfg-social-phone').value = siteData.socials.phone || '';
+
+            document.getElementById('cfg-admin-current-pass').value = '';
+            document.getElementById('cfg-admin-pass').value = '';
+            document.getElementById('cfg-admin-pass-confirm').value = '';
+            document.getElementById('cfg-recovery-email').value = siteData.security.recoveryEmail || '';
+            document.getElementById('cfg-recovery-phone').value = siteData.security.recoveryPhone || '';
+
+            // إعدادات النشر المباشر
+            document.getElementById('gh-owner').value = siteData.githubSync.owner || '';
+            document.getElementById('gh-repo').value = siteData.githubSync.repo || '';
+            document.getElementById('gh-path').value = siteData.githubSync.path || 'index.html';
+            document.getElementById('gh-token').value = siteData.githubSync.token || '';
+
+            renderAdminHomeBlocksManager();
+            renderAdminSectionsManager();
+            renderAdminScheduleList();
+            renderAdminSocialPlatformsList();
+        }
+
+        function handleImageUpload(input, key) {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async e => {
+                siteData.identity[key] = e.target.result;
+                await persistSiteData();
+                applySiteIdentity();
+                showToast('تم رفع الصورة وتطبيقها');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function clearUploadedImage(key) {
+            siteData.identity[key] = '';
+            await persistSiteData();
+            applySiteIdentity();
+            showToast('تمت إزالة الصورة');
+        }
+
+        async function saveIdentitySettings() {
+            const id = siteData.identity;
+            id.prefix = stripFadila(document.getElementById('cfg-prefix').value.trim());
+            id.name = stripFadila(document.getElementById('cfg-name').value.trim());
+            id.desc = stripFadila(document.getElementById('cfg-desc').value.trim());
+            id.headerFont = document.getElementById('cfg-header-font').value;
+            id.nameImgHeight = parseInt(document.getElementById('cfg-name-img-height').value) || 54;
+            id.colorPrimary = document.getElementById('cfg-color-primary').value;
+            id.colorAccent = document.getElementById('cfg-color-accent').value;
+            id.colorBg = document.getElementById('cfg-color-bg').value;
+
+            id.topbarTagline = document.getElementById('cfg-topbar-tagline').value.trim();
+            id.searchPlaceholder = document.getElementById('cfg-search-placeholder').value.trim();
+            id.sidebarHeading = document.getElementById('cfg-sidebar-heading').value.trim();
+            id.tickerBadge = document.getElementById('cfg-ticker-badge').value.trim() || 'جديد الموقع';
+            id.btnHideSidebar = document.getElementById('cfg-btn-hide-sidebar').value.trim() || 'إخفاء القائمة';
+            id.btnShowSidebar = document.getElementById('cfg-btn-show-sidebar').value.trim() || 'إظهار القائمة';
+            id.btnMoreText = document.getElementById('cfg-btn-more-text').value.trim() || 'المزيد »';
+            id.scheduleBadgeText = document.getElementById('cfg-schedule-badge-text').value.trim() || 'محدّث';
+            id.marqueeSpeed = parseInt(document.getElementById('cfg-marquee-speed').value) || 28;
+            id.customTickerText = document.getElementById('cfg-custom-ticker').value.trim();
+            id.footerCol1Title = document.getElementById('cfg-footer-col1-title').value.trim();
+            id.footerCol1Text = document.getElementById('cfg-footer-col1-text').value.trim();
+            id.footerCol2Title = document.getElementById('cfg-footer-col2-title').value.trim();
+            id.footerCol3Title = document.getElementById('cfg-footer-col3-title').value.trim();
+            id.footerCol3Text = document.getElementById('cfg-footer-col3-text').value.trim();
+            id.footerCopyright = document.getElementById('cfg-footer-copyright').value.trim();
+
+            await persistSiteData();
+            applySiteIdentity();
+            renderNewsTicker();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم حفظ جميع إعدادات الهوية والمظهر بنجاح');
+        }
+
+        /* --- تخصيص بطاقات الصفحة الرئيسية --- */
+        function populateNewHomeBlockSelect() {
+            const sel = document.getElementById('new-home-block-sec');
+            if (!sel) return;
+            const contentSecs = siteData.sections.filter(s => !s.isHome);
+            sel.innerHTML = contentSecs.map(s => `<option value="${s.id}">${escapeHtml(s.label)}</option>`).join('') +
+                `<option value="scientific_mix">تجميعة أحدث المحاضرات والدروس العلمية</option>`;
+        }
+
+        async function addNewHomeBlock() {
+            const secId = document.getElementById('new-home-block-sec').value;
+            const count = Math.max(1, parseInt(document.getElementById('new-home-block-count').value) || 4);
+            if (!secId) return;
+
+            let title = 'بطاقة قسم جديدة';
+            if (secId === 'scientific_mix') {
+                title = 'أحدث المحاضرات والدروس والدورات العلمية';
+            } else {
+                const secObj = siteData.sections.find(s => s.id === secId);
+                if (secObj) title = secObj.label;
+            }
+
+            siteData.homeBlocks.push({ id: secId, title, visible: true, count });
+            await persistSiteData();
+            renderAdminHomeBlocksManager();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تمت إضافة البطاقة إلى الصفحة الرئيسية');
+        }
+
+        function renderAdminHomeBlocksManager() {
+            populateNewHomeBlockSelect();
+            const list = document.getElementById('admin-home-blocks-list');
+            list.innerHTML = siteData.homeBlocks.map((b, idx) => `
+                <div class="py-3 flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[220px]">
+                        <input type="text" value="${escapeAttr(b.title)}" onchange="updateHomeBlockTitle(${idx}, this.value)" class="px-3 py-1.5 border rounded-lg text-xs font-bold text-primary flex-1 min-w-[200px]">
+                        <div class="flex items-center gap-1 text-xs text-gray-600">
+                            <span>العدد:</span>
+                            <input type="number" min="1" max="20" value="${b.count || 4}" onchange="updateHomeBlockCount(${idx}, this.value)" class="w-14 px-2 py-1 border rounded-lg text-xs text-center">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="moveHomeBlock(${idx}, -1)" class="px-2 py-1 rounded bg-stone-100 hover:bg-stone-200 text-xs font-bold">↑</button>
+                        <button onclick="moveHomeBlock(${idx}, 1)" class="px-2 py-1 rounded bg-stone-100 hover:bg-stone-200 text-xs font-bold">↓</button>
+                        <button onclick="toggleHomeBlockVisibility(${idx})" class="px-3 py-1 rounded-lg text-xs font-bold ${b.visible !== false ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-200 text-gray-600'}">
+                            ${b.visible !== false ? 'ظاهرة' : 'مخفية'}
+                        </button>
+                        <button onclick="deleteHomeBlock(${idx})" class="px-3 py-1 rounded-lg bg-red-100 text-red-700 text-xs font-bold">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function updateHomeBlockTitle(idx, val) {
+            siteData.homeBlocks[idx].title = val.trim();
+            await persistSiteData();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        async function updateHomeBlockCount(idx, val) {
+            siteData.homeBlocks[idx].count = Math.max(1, parseInt(val) || 4);
+            await persistSiteData();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        async function moveHomeBlock(idx, dir) {
+            const target = idx + dir;
+            if (target < 0 || target >= siteData.homeBlocks.length) return;
+            const tmp = siteData.homeBlocks[idx];
+            siteData.homeBlocks[idx] = siteData.homeBlocks[target];
+            siteData.homeBlocks[target] = tmp;
+            await persistSiteData();
+            renderAdminHomeBlocksManager();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        async function toggleHomeBlockVisibility(idx) {
+            siteData.homeBlocks[idx].visible = siteData.homeBlocks[idx].visible === false;
+            await persistSiteData();
+            renderAdminHomeBlocksManager();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        async function deleteHomeBlock(idx) {
+            siteData.homeBlocks.splice(idx, 1);
+            await persistSiteData();
+            renderAdminHomeBlocksManager();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم حذف البطاقة من الصفحة الرئيسية');
+        }
+
+        async function toggleScheduleColumnVisibility(checked) {
+            siteData.showScheduleColumn = checked;
+            await persistSiteData();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        /* --- إدارة الأقسام والحقول --- */
+        function renderAdminSectionsManager() {
+            const list = document.getElementById('admin-sections-list');
+            list.innerHTML = siteData.sections.map((s, idx) => {
+                const f = s.allowedFields || {};
+                return `
+                    <div class="py-3 space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 flex-1 min-w-[200px]">
+                                <input type="text" value="${escapeAttr(s.label)}" onchange="renameSection(${idx}, this.value)" class="px-3 py-1.5 border rounded-lg text-xs font-bold text-primary w-48">
+                                <span class="text-[11px] text-gray-400">${s.isHome ? '(الصفحة الرئيسية)' : `(${(siteData.items[s.id] || []).length} مادة)`}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="moveSection(${idx}, -1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↑</button>
+                                <button onclick="moveSection(${idx}, 1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↓</button>
+                                <button onclick="toggleSectionVisibility(${idx})" class="px-3 py-1 rounded-lg text-xs font-bold ${s.visible !== false ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-200 text-gray-600'}">
+                                    ${s.visible !== false ? 'ظاهر' : 'مخفي'}
+                                </button>
+                                ${!s.isHome ? `<button onclick="deleteCustomSection(${idx})" class="px-3 py-1 rounded-lg bg-red-100 text-red-700 text-xs font-bold">حذف</button>` : ''}
+                            </div>
+                        </div>
+                        ${!s.isHome ? `
+                            <div class="flex flex-wrap items-center gap-3 text-[11px] text-gray-600 bg-stone-50 px-3 py-1.5 rounded-lg">
+                                <span class="font-bold text-primary">حقول الإدخال:</span>
+                                <label class="inline-flex items-center gap-1 cursor-pointer"><input type="checkbox" ${f.audio ? 'checked' : ''} onchange="toggleSectionField(${idx}, 'audio', this.checked)"> صوتي</label>
+                                <label class="inline-flex items-center gap-1 cursor-pointer"><input type="checkbox" ${f.external ? 'checked' : ''} onchange="toggleSectionField(${idx}, 'external', this.checked)"> رابط خارجي</label>
+                                <label class="inline-flex items-center gap-1 cursor-pointer"><input type="checkbox" ${f.pdf ? 'checked' : ''} onchange="toggleSectionField(${idx}, 'pdf', this.checked)"> PDF</label>
+                                <label class="inline-flex items-center gap-1 cursor-pointer"><input type="checkbox" ${f.cover ? 'checked' : ''} onchange="toggleSectionField(${idx}, 'cover', this.checked)"> غلاف</label>
+                                <label class="inline-flex items-center gap-1 cursor-pointer"><input type="checkbox" ${f.body ? 'checked' : ''} onchange="toggleSectionField(${idx}, 'body', this.checked)"> نص</label>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function addNewCustomSection() {
+            const title = stripFadila(document.getElementById('new-sec-title').value.trim());
+            const icon = document.getElementById('new-sec-icon').value;
+            const desc = stripFadila(document.getElementById('new-sec-desc').value.trim());
+            if (!title) return showToast('يرجى إدخال اسم القسم');
+
+            const newId = 'sec_' + Date.now();
+            const allowedFields = {
+                audio: document.getElementById('new-sec-f-audio').checked,
+                external: document.getElementById('new-sec-f-external').checked,
+                pdf: document.getElementById('new-sec-f-pdf').checked,
+                cover: document.getElementById('new-sec-f-cover').checked,
+                body: document.getElementById('new-sec-f-body').checked
+            };
+
+            siteData.sections.push({ id: newId, label: title, icon, desc, visible: true, removable: true, allowedFields });
+            siteData.items[newId] = [];
+
+            document.getElementById('new-sec-title').value = '';
+            document.getElementById('new-sec-desc').value = '';
+            await persistSiteData();
+            renderAdminSectionsManager();
+            populateNewHomeBlockSelect();
+            buildAdminTabsBar();
+            renderNavigationAndSidebar();
+            showToast('تم إنشاء القسم وتخصيص حقوله بنجاح');
+        }
+
+        async function renameSection(idx, val) {
+            if (!val.trim()) return;
+            siteData.sections[idx].label = stripFadila(val.trim());
+            await persistSiteData();
+            buildAdminTabsBar();
+            renderNavigationAndSidebar();
+        }
+
+        async function toggleSectionField(idx, fieldKey, checked) {
+            if (!siteData.sections[idx].allowedFields) siteData.sections[idx].allowedFields = {};
+            siteData.sections[idx].allowedFields[fieldKey] = checked;
+            await persistSiteData();
+        }
+
+        async function moveSection(idx, dir) {
+            const target = idx + dir;
+            if (target < 0 || target >= siteData.sections.length) return;
+            const tmp = siteData.sections[idx];
+            siteData.sections[idx] = siteData.sections[target];
+            siteData.sections[target] = tmp;
+            await persistSiteData();
+            renderAdminSectionsManager();
+            buildAdminTabsBar();
+            renderNavigationAndSidebar();
+        }
+
+        async function toggleSectionVisibility(idx) {
+            siteData.sections[idx].visible = siteData.sections[idx].visible === false;
+            await persistSiteData();
+            renderAdminSectionsManager();
+            renderNavigationAndSidebar();
+        }
+
+        async function deleteCustomSection(idx) {
+            const sec = siteData.sections[idx];
+            if (!sec || sec.isHome) return;
+            delete siteData.items[sec.id];
+            siteData.homeBlocks = siteData.homeBlocks.filter(b => b.id !== sec.id);
+            siteData.sections.splice(idx, 1);
+            await persistSiteData();
+            renderAdminSectionsManager();
+            renderAdminHomeBlocksManager();
+            buildAdminTabsBar();
+            renderNavigationAndSidebar();
+            if (currentActiveSection === sec.id) navigateToSection('home');
+            else if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم حذف القسم بالكامل');
+        }
+
+        /* --- إدارة جدول الدروس --- */
+        async function saveScheduleHeading() {
+            siteData.scheduleHeading = document.getElementById('cfg-schedule-heading').value.trim() || 'جدول الدروس العلمية';
+            await persistSiteData();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم تحديث عنوان الجدول');
+        }
+
+        function renderAdminScheduleList() {
+            const list = document.getElementById('admin-schedule-list');
+            if (!siteData.schedule.length) {
+                list.innerHTML = '<p class="text-xs text-gray-400 py-4 text-center">لا توجد دروس مجدولة حالياً.</p>';
+                return;
+            }
+            list.innerHTML = siteData.schedule.map((s, idx) => `
+                <div class="py-3 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <div class="font-bold text-xs text-primary">${escapeHtml(s.title)}</div>
+                        <div class="text-[11px] text-gray-500">${escapeHtml(s.day)} ${s.time ? '- ' + escapeHtml(s.time) : ''} ${s.location ? '(' + escapeHtml(s.location) + ')' : ''}</div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="moveScheduleItem(${idx}, -1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↑</button>
+                        <button onclick="moveScheduleItem(${idx}, 1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↓</button>
+                        <button onclick="editScheduleEntry(${idx})" class="px-2.5 py-1 rounded bg-amber-100 text-amber-900 text-xs font-bold">تعديل</button>
+                        <button onclick="deleteScheduleEntry(${idx})" class="px-2.5 py-1 rounded bg-red-100 text-red-700 text-xs font-bold">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function saveScheduleEntry() {
+            const day = document.getElementById('sched-day').value.trim();
+            const time = document.getElementById('sched-time').value.trim();
+            const title = document.getElementById('sched-title').value.trim();
+            const location = document.getElementById('sched-location').value.trim();
+            const idx = parseInt(document.getElementById('sched-edit-idx').value);
+
+            if (!day || !title) return showToast('يرجى إدخال اليوم وعنوان الدرس');
+            const entry = { day, time, title, location };
+
+            if (idx >= 0) siteData.schedule[idx] = entry;
+            else siteData.schedule.push(entry);
+
+            await persistSiteData();
+            renderAdminScheduleList();
+            resetScheduleForm();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم حفظ الدرس في الجدول');
+        }
+
+        function editScheduleEntry(idx) {
+            const s = siteData.schedule[idx];
+            document.getElementById('sched-edit-idx').value = idx;
+            document.getElementById('sched-day').value = s.day;
+            document.getElementById('sched-time').value = s.time || '';
+            document.getElementById('sched-title').value = s.title;
+            document.getElementById('sched-location').value = s.location || '';
+            document.getElementById('sched-cancel-btn').classList.remove('hidden');
+        }
+
+        async function moveScheduleItem(idx, dir) {
+            const target = idx + dir;
+            if (target < 0 || target >= siteData.schedule.length) return;
+            const tmp = siteData.schedule[idx];
+            siteData.schedule[idx] = siteData.schedule[target];
+            siteData.schedule[target] = tmp;
+            await persistSiteData();
+            renderAdminScheduleList();
+            if (currentActiveSection === 'home') renderHomeContent();
+        }
+
+        async function deleteScheduleEntry(idx) {
+            siteData.schedule.splice(idx, 1);
+            await persistSiteData();
+            renderAdminScheduleList();
+            if (currentActiveSection === 'home') renderHomeContent();
+            showToast('تم حذف الدرس من الجدول');
+        }
+
+        function resetScheduleForm() {
+            document.getElementById('sched-edit-idx').value = '-1';
+            document.getElementById('sched-day').value = '';
+            document.getElementById('sched-time').value = '';
+            document.getElementById('sched-title').value = '';
+            document.getElementById('sched-location').value = '';
+            document.getElementById('sched-cancel-btn').classList.add('hidden');
+        }
+
+        /* --- إدارة مواد كل قسم --- */
+        function openContentEditorForSection(secId) {
+            const sec = siteData.sections.find(s => s.id === secId);
+            if (!sec) return;
+            document.getElementById('content-editor-heading').textContent = `إضافة أو تعديل مادة في: ${sec.label}`;
+            document.getElementById('content-editor-sec-badge').textContent = sec.label;
+
+            const f = sec.allowedFields || { audio: true, external: true, pdf: true, cover: true, body: true };
+            document.getElementById('field-group-audio').classList.toggle('hidden', !f.audio);
+            document.getElementById('field-group-external').classList.toggle('hidden', !f.external);
+            document.getElementById('field-group-pdf').classList.toggle('hidden', !f.pdf);
+            document.getElementById('field-group-cover').classList.toggle('hidden', !f.cover);
+            document.getElementById('field-group-body').classList.toggle('hidden', !f.body);
+
+            resetItemEditorForm();
+            renderAdminSectionItemsList(secId);
+        }
+
+        function handleItemMediaFile(input, type) {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                tempUploadedMedia[type] = e.target.result;
+                showToast('تم تجهيز الملف المرفوع بنجاح');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function saveSectionItem() {
+            const secId = currentEditingContentSecId;
+            const title = document.getElementById('item-title').value.trim();
+            if (!title) return showToast('يرجى إدخال عنوان المادة');
+
+            const editId = document.getElementById('item-edit-id').value;
+            const existing = editId ? (siteData.items[secId] || []).find(i => i.id === editId) : null;
+
+            const newItem = {
+                id: editId || ('item_' + Date.now()),
+                title,
+                date: document.getElementById('item-date').value.trim(),
+                audioUrl: tempUploadedMedia.audio || document.getElementById('item-audio-url').value.trim() || (existing ? existing.audioUrl : ''),
+                externalUrl: document.getElementById('item-external-url').value.trim(),
+                externalLabel: document.getElementById('item-external-label').value.trim(),
+                pdfUrl: tempUploadedMedia.pdf || document.getElementById('item-pdf-url').value.trim() || (existing ? existing.pdfUrl : ''),
+                coverUrl: tempUploadedMedia.cover || document.getElementById('item-cover-url').value.trim() || (existing ? existing.coverUrl : ''),
+                body: document.getElementById('item-body').value.trim()
+            };
+
+            if (!Array.isArray(siteData.items[secId])) siteData.items[secId] = [];
+            if (editId) {
+                const idx = siteData.items[secId].findIndex(i => i.id === editId);
+                if (idx >= 0) siteData.items[secId][idx] = newItem;
+            } else {
+                siteData.items[secId].unshift(newItem);
+            }
+
+            await persistSiteData();
+            resetItemEditorForm();
+            renderAdminSectionItemsList(secId);
+            renderNavigationAndSidebar();
+            renderNewsTicker();
+            if (currentActiveSection === 'home') renderHomeContent();
+            else if (currentActiveSection === secId) renderSectionView(secId);
+            showToast('تم حفظ ونشر المادة بنجاح');
+        }
+
+        function renderAdminSectionItemsList(secId) {
+            const list = document.getElementById('admin-section-items-list');
+            const items = siteData.items[secId] || [];
+            if (!items.length) {
+                list.innerHTML = '<p class="text-xs text-gray-400 py-4 text-center">لا توجد مواد منشورة في هذا القسم بعد.</p>';
+                return;
+            }
+            list.innerHTML = items.map(it => `
+                <div class="py-3 flex flex-wrap items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <div class="font-bold text-xs text-primary truncate">${escapeHtml(it.title)}</div>
+                        <div class="text-[11px] text-gray-400 flex gap-2 mt-0.5">
+                            ${it.audioUrl ? '<span>• ملف صوتي</span>' : ''}
+                            ${it.externalUrl ? '<span>• رابط خارجي</span>' : ''}
+                            ${it.pdfUrl ? '<span>• PDF</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="editSectionItem('${secId}', '${it.id}')" class="px-2.5 py-1 rounded bg-amber-100 text-amber-900 text-xs font-bold">تعديل</button>
+                        <button onclick="deleteSectionItem('${secId}', '${it.id}')" class="px-2.5 py-1 rounded bg-red-100 text-red-700 text-xs font-bold">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editSectionItem(secId, itemId) {
+            const it = (siteData.items[secId] || []).find(i => i.id === itemId);
+            if (!it) return;
+            tempUploadedMedia = { audio: '', pdf: '', cover: '' };
+            document.getElementById('item-edit-id').value = it.id;
+            document.getElementById('item-title').value = it.title;
+            document.getElementById('item-date').value = it.date || '';
+            document.getElementById('item-audio-url').value = it.audioUrl && !it.audioUrl.startsWith('data:') ? it.audioUrl : '';
+            document.getElementById('item-external-url').value = it.externalUrl || '';
+            document.getElementById('item-external-label').value = it.externalLabel || '';
+            document.getElementById('item-pdf-url').value = it.pdfUrl && !it.pdfUrl.startsWith('data:') ? it.pdfUrl : '';
+            document.getElementById('item-cover-url').value = it.coverUrl && !it.coverUrl.startsWith('data:') ? it.coverUrl : '';
+            document.getElementById('item-body').value = it.body || '';
+            document.getElementById('item-cancel-edit-btn').classList.remove('hidden');
+        }
+
+        async function deleteSectionItem(secId, itemId) {
+            siteData.items[secId] = (siteData.items[secId] || []).filter(i => i.id !== itemId);
+            await persistSiteData();
+            renderAdminSectionItemsList(secId);
+            renderNavigationAndSidebar();
+            renderNewsTicker();
+            if (currentActiveSection === 'home') renderHomeContent();
+            else if (currentActiveSection === secId) renderSectionView(secId);
+            showToast('تم حذف المادة');
+        }
+
+        function resetItemEditorForm() {
+            tempUploadedMedia = { audio: '', pdf: '', cover: '' };
+            document.getElementById('item-edit-id').value = '';
+            document.getElementById('item-title').value = '';
+            document.getElementById('item-date').value = '';
+            document.getElementById('item-audio-file').value = '';
+            document.getElementById('item-audio-url').value = '';
+            document.getElementById('item-external-url').value = '';
+            document.getElementById('item-external-label').value = '';
+            document.getElementById('item-pdf-file').value = '';
+            document.getElementById('item-pdf-url').value = '';
+            document.getElementById('item-cover-file').value = '';
+            document.getElementById('item-cover-url').value = '';
+            document.getElementById('item-body').value = '';
+            document.getElementById('item-cancel-edit-btn').classList.add('hidden');
+        }
+
+        /* --- منصات التواصل والأمان والنشر السحابي --- */
+        function renderAdminSocialPlatformsList() {
+            const listEl = document.getElementById('admin-social-platforms-list');
+            const platforms = siteData.socials.platforms || [];
+            if (!platforms.length) {
+                listEl.innerHTML = '<p class="text-xs text-gray-400 py-4 text-center">لا توجد منصات تواصل مضافة حالياً.</p>';
+                return;
+            }
+            listEl.innerHTML = platforms.map((p, idx) => `
+                <div class="py-2.5 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[220px]">
+                        <input type="text" value="${escapeAttr(p.label)}" onchange="updateSocialPlatform(${idx}, 'label', this.value)" class="px-2.5 py-1.5 border rounded-lg text-xs font-bold text-primary w-36">
+                        <input type="url" dir="ltr" value="${escapeAttr(p.url)}" onchange="updateSocialPlatform(${idx}, 'url', this.value)" class="px-2.5 py-1.5 border rounded-lg text-xs text-gray-700 flex-1 min-w-[180px]">
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="moveSocialPlatform(${idx}, -1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↑</button>
+                        <button onclick="moveSocialPlatform(${idx}, 1)" class="px-2 py-1 rounded bg-stone-100 text-xs font-bold">↓</button>
+                        <button onclick="deleteSocialPlatform(${idx})" class="px-3 py-1 rounded bg-red-100 text-red-700 text-xs font-bold">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addNewSocialPlatform() {
+            const label = document.getElementById('new-social-label').value.trim();
+            const icon = document.getElementById('new-social-icon').value;
+            const url = document.getElementById('new-social-url').value.trim();
+            if (!label || !url) return showToast('يرجى إدخال اسم المنصة والرابط');
+
+            siteData.socials.platforms.push({ id: 'soc_' + Date.now(), label, icon, url });
+            document.getElementById('new-social-label').value = '';
+            document.getElementById('new-social-url').value = '';
+            await persistSiteData();
+            renderAdminSocialPlatformsList();
+            applySiteIdentity();
+            showToast('تمت إضافة المنصة بنجاح');
+        }
+
+        async function updateSocialPlatform(idx, field, val) {
+            siteData.socials.platforms[idx][field] = val.trim();
+            await persistSiteData();
+            applySiteIdentity();
+        }
+
+        async function moveSocialPlatform(idx, dir) {
+            const list = siteData.socials.platforms;
+            const target = idx + dir;
+            if (target < 0 || target >= list.length) return;
+            const tmp = list[idx];
+            list[idx] = list[target];
+            list[target] = tmp;
+            await persistSiteData();
+            renderAdminSocialPlatformsList();
+            applySiteIdentity();
+        }
+
+        async function deleteSocialPlatform(idx) {
+            siteData.socials.platforms.splice(idx, 1);
+            await persistSiteData();
+            renderAdminSocialPlatformsList();
+            applySiteIdentity();
+            showToast('تم حذف المنصة');
+        }
+
+        async function saveSocialLinks() {
+            siteData.socials.email = document.getElementById('cfg-social-email').value.trim();
+            siteData.socials.phone = document.getElementById('cfg-social-phone').value.trim();
+            await persistSiteData();
+            applySiteIdentity();
+            showToast('تم حفظ إعدادات التواصل');
+        }
+
+        async function saveSecuritySettings() {
+            const currentPass = document.getElementById('cfg-admin-current-pass').value;
+            const newPass = document.getElementById('cfg-admin-pass').value;
+            const confirmPass = document.getElementById('cfg-admin-pass-confirm').value;
+
+            if (!currentPass || currentPass !== (siteData.security.password || '224466')) {
+                return showToast('يرجى إدخال كلمة المرور الحالية الصحيحة أولاً');
+            }
+
+            if (newPass) {
+                if (newPass !== confirmPass) {
+                    return showToast('كلمة المرور الجديدة وتأكيدها غير متطابقتين');
+                }
+                siteData.security.password = newPass;
+            }
+
+            siteData.security.recoveryEmail = document.getElementById('cfg-recovery-email').value.trim();
+            siteData.security.recoveryPhone = document.getElementById('cfg-recovery-phone').value.trim();
+
+            await persistSiteData();
+            document.getElementById('cfg-admin-current-pass').value = '';
+            document.getElementById('cfg-admin-pass').value = '';
+            document.getElementById('cfg-admin-pass-confirm').value = '';
+            showToast('تم حفظ كلمة المرور وإعدادات الأمان بنجاح');
+        }
+
+        /* =========================================================
+           7. بناء الملف النهائي وتصديره أو نشره مباشرة على نفس الرابط
+           ========================================================= */
+        function buildStandaloneHtmlString() {
+            // نُنشئ نسخة قابلة للنشر مع إخفاء رمز GitHub Token السري من النسخة العامة
+            const publicData = JSON.parse(JSON.stringify(siteData));
+            if (publicData.githubSync) publicData.githubSync.token = '';
+
+            const cloneDoc = document.documentElement.cloneNode(true);
+            // إغلاق النوافذ المفتوحة في النسخة المصدرة
+            const adminModal = cloneDoc.querySelector('#admin-dashboard-modal');
+            if (adminModal) adminModal.classList.add('hidden');
+            const loginModal = cloneDoc.querySelector('#admin-login-modal');
+            if (loginModal) loginModal.classList.add('hidden');
+            const readerModal = cloneDoc.querySelector('#reader-modal');
+            if (readerModal) readerModal.classList.add('hidden');
+
+            const embeddedScript = cloneDoc.querySelector('#embedded-site-data');
+            if (embeddedScript) {
+                embeddedScript.textContent = JSON.stringify(publicData);
+            }
+            return '<!DOCTYPE html>\n' + cloneDoc.outerHTML;
+        }
+
+        function exportStandaloneHTML() {
+            const fullHtml = buildStandaloneHtmlString();
+            const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('تم تنزيل ملف index.html النهائي شاملاً كافة تعديلاتك وملفاتك');
+        }
+
+        async function saveGithubConfig() {
+            siteData.githubSync = {
+                owner: document.getElementById('gh-owner').value.trim(),
+                repo: document.getElementById('gh-repo').value.trim(),
+                path: document.getElementById('gh-path').value.trim() || 'index.html',
+                token: document.getElementById('gh-token').value.trim()
+            };
+            await persistSiteData();
+            showToast('تم حفظ إعدادات الربط السحابي');
+        }
+
+        async function publishDirectlyToGithub() {
+            await saveGithubConfig();
+            const { owner, repo, path, token } = siteData.githubSync;
+            if (!owner || !repo || !token) {
+                return showToast('يرجى إكمال بيانات المستودع ورمز الوصول أولاً');
+            }
+
+            showToast('جاري رفع التعديلات إلى الموقع العام...');
+            try {
+                const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${encodeURIComponent(path)}`;
+                let sha = null;
+                const getRes = await fetch(apiUrl, {
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+                });
+                if (getRes.ok) {
+                    const info = await getRes.json();
+                    sha = info.sha;
+                }
+
+                const htmlContent = buildStandaloneHtmlString();
+                const base64Content = btoa(unescape(encodeURIComponent(htmlContent)));
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'تحديث محتوى الموقع الرسمي للشيخ أحمد السجاعي',
+                        content: base64Content,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    showToast('تم النشر بنجاح! ستظهر التعديلات عند جميع الزوار على نفس الرابط خلال دقيقة.');
+                } else {
+                    const err = await putRes.json();
+                    showToast('تعذر النشر: ' + (err.message || 'تأكد من صلاحيات الرمز'));
+                }
+            } catch (e) {
+                showToast('حدث خطأ في الاتصال بالشبكة أثناء النشر');
+            }
+        }
+
+        /* =========================================================
+           8. التشغيل الأولي عند تحميل الصفحة
+           ========================================================= */
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadSiteData();
+            applySiteIdentity();
+            renderNavigationAndSidebar();
+            renderNewsTicker();
+            renderHomeContent();
+            enableDragScroll(document.getElementById('top-nav-scroller'));
+            enableDragScroll(document.getElementById('admin-tabs-scroller'));
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
